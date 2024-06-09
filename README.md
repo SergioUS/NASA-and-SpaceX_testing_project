@@ -22,7 +22,7 @@
 
 [Valentina Matikaynen](https://www.linkedin.com/in/valentina-matikaynen)
 
-[Victoria Timura](https://www.linkedin.com/in/victoria-timura)
+[Victoria Timura](https://www.linkedin.com/in/victoria-timura/)
 
 [Volha Bratuhin](https://www.linkedin.com/in/volha-bratuhin)
 
