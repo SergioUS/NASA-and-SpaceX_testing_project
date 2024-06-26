@@ -6,7 +6,7 @@
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=300000&size=21&multiline=true&width=700&lines=WELCOME+TO+NASA+AND+SPACEX+TESTING+PROJECT!)](https://git.io/typing-svg)
 
-🚀 In this repository, our team of dedicated Software QA professionals is on a mission to ensure the quality and reliability of the NASA and SpaceX websites through comprehensive testing.
+🚀 In this repository, our team of dedicated Software QA professionals is on a mission to ensure the quality and reliability of the [NASA](https://www.nasa.gov/) and [SpaceX](https://www.spacex.com/) websites through comprehensive testing.
 
 🛰️ Join us in our journey as we strive to maintain the highest standards for this invaluable resources.
 
