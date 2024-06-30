@@ -1,29 +1,42 @@
+#Unittest (Positive and Negative tests) for SpaceX site / Rideshare module
+#Volha Bratuhin
+
 import unittest
 import time
 import random
 from faker import Faker
 from selenium import webdriver
-from selenium.webdriver import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import WebDriverException as WDE
 from selenium.webdriver.support import expected_conditions as EC, wait
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
+import VBratuhin_Rideshare_Helper as H
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 fake = Faker()
-
 def delay():
-    time.sleep(random.randint(1, 2))
+    time.sleep(random.randint(2, 3))
 
 class Spacex_Rideshare_01_Positive(unittest.TestCase):
 
-    def test_01(self):
+    # def SetUp_Headless(self):
+    #
+    #     options = webdriver.ChromeOptions()
+    #     options.page_load_strategy = 'eager'
+    #     options.add_argument('--headless')
+    #     self.driver = webdriver.Chrome(options=options)
+    #     self.driver.maximize_window()
+
+    def setUp(self):
         self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+
+    def test_030(self):
+
         driver = self.driver
-        driver.get("https://www.spacex.com/")
+        self.driver.maximize_window()
+
+        driver.get(H.Spacex_url)
 
         # Verify Title
         try:
@@ -48,39 +61,43 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "//li[@class='nav-item'][contains(.,'Starlink')]")
             driver.find_element(By.XPATH, "//div[@id='navigation-right']")
             driver.find_element(By.XPATH, "//button[@id='hamburger']").click()
-            delay()
+            time.sleep(1)
             driver.find_element(By.XPATH, "//button[@id='hamburger']").click()
-            delay()
+            time.sleep(1)
 
             print("All icons in header menu is displayed")
         except NoSuchElementException:
+        #except EC:
             print("Some icons in header menu is missing")
 
         # Verify elements on the page
         try:
             driver.find_element(By.XPATH, "//h1[@class='animate'][contains(.,'SmallsatRideshare Program')]")
             driver.find_element(By.XPATH, "//p[contains(text(),'Dedicated Rideshare Missions as Low as $300k*. Sea')]")
-
             driver.execute_script("window.scrollTo(0, 500)")
-            delay()
+            time.sleep(2)
             driver.find_element(By.XPATH, "//h2[contains(text(),'COST AS LOW AS $300k')]")
             driver.find_element(By.XPATH, "//h2[contains(text(),'SCHEDULE CERTAINTY')]")
             driver.find_element(By.XPATH, "//h2[contains(text(),'CONTRACT FLEXIBILITY')]")
             driver.find_element(By.XPATH, "//span[contains(text(),'$300k for 50kg to SSO with additional mass at $6k/')]")
             driver.find_element(By.XPATH, "//span[contains(text(),'SSO missions approximately every 4 months. Frequen')]")
             driver.find_element(By.XPATH, "//span[contains(text(),'If your payload is delayed, apply 100% of monies p')]")
-
-            driver.execute_script("window.scrollTo(0, 1050)")
-            delay()
+            driver.execute_script("window.scrollTo(0, 800)")
+            time.sleep(2)
             driver.find_element(By.XPATH, "//h2[contains(text(),'RESERVE YOUR RIDE ONLINE')]")
             driver.find_element(By.XPATH, "//p[contains(text(),'Find all the information you need to make a reserv')]")
             driver.find_element(By.XPATH, "//p[contains(text(),'Payloads are received at the launch site around L-')]")
             driver.find_element(By.XPATH, "//div[contains(text(),\"Payload User's Guide\")]")
             driver.find_element(By.XPATH, "//div[contains(text(),\"Cake Topper User's Guide\")]")
-
-
-            driver.execute_script("window.scrollTo(0, 1500)")
-            delay()
+            driver.execute_script("window.scrollTo(0, 1300)")
+            time.sleep(2)
+            driver.find_element(By.XPATH, "//span[contains(text(),'Place Order Online')]")
+            driver.find_element(By.XPATH, "//span[contains(text(),'Welcome Package')]")
+            driver.find_element(By.XPATH, "//span[contains(text(),'Spacecraft Data Package')]")
+            driver.find_element(By.XPATH, "//span[contains(text(),'Launch Processing')]")
+            driver.find_element(By.XPATH, "//span[contains(text(),'Launch!')]")
+            driver.execute_script("window.scrollTo(0, 1700)")
+            time.sleep(2)
             driver.find_element(By.XPATH, "//h2[contains(text(),'Payload Configurations')]")
             driver.find_element(By.XPATH, "//p[contains(text(),'Book your ride on a Rideshare Plate. For larger sp')]")
             driver.find_element(By.XPATH, "//td[contains(text(),'1/4 PLATE')]")
@@ -92,16 +109,15 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "//span[contains(text(),'200kg included')]")
             driver.find_element(By.XPATH, "//span[contains(text(),'300kg included')]")
             driver.find_element(By.XPATH, "//strong[contains(text(),'Learn more about available volume ')]").click()
-            time.sleep(2)
+            time.sleep(3)
             window_before = driver.window_handles[0]
-            driver.find_element(By.XPATH, "//h2[contains(text(),'Payload Configurations')]")
+            driver.find_element(By.XPATH, "//strong[contains(text(),'Learn more about available volume ')]")
             time.sleep(1)
             window_after = driver.window_handles[1]
             driver.switch_to.window(window_after)
             time.sleep(1)
             driver.switch_to.window(window_before)
             time.sleep(1)
-
             driver.execute_script("window.scrollTo(0, 2000)")
             delay()
             driver.find_element(By.XPATH, "//h2[contains(text(),'Falcon 9')]")
@@ -116,9 +132,8 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "//td[contains(.,'13.1m / 43ft')]")
             driver.find_element(By.XPATH, "//td[contains(.,'5.2m / 17.1ft')]")
             driver.find_element(By.XPATH, "//strong[contains(text(),'Learn more about Falcon 9')]").click()
-            delay()
+            time.sleep(3)
             driver.execute_script("window.history.go(-1)")
-
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
             delay()
             driver.find_element(By.XPATH, "//p[contains(text(),'*Pricing adjusted in March 2022 to account for exc')]")
@@ -126,22 +141,21 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "//a[contains(text(),'PRIVACY POLICY')]")
             driver.find_element(By.XPATH, "//a[contains(text(),'SUPPLIERS')]")
             driver.find_element(By.XPATH, "//div[contains(text(),'Contact us')]").click()
-            time.sleep(2)
+            time.sleep(3)
 
 
-            print("TC-1 passed. All icons on the page is displayed")
+            print("TC-030 passed. All icons on the page is displayed")
         except NoSuchElementException:
-            print("TC-1 failed. Some icons on the page is missing")
+            print("TC-030 failed. Some icons on the page is missing")
 
         self.driver.quit()
 
-    def test_02(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_031(self):
+
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify search flights
         try:
@@ -158,13 +172,19 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "//div[contains(text(),'JAN')]").click()
             driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
             delay()
-            driver.find_element(By.XPATH, "//div[contains(text(),'Estimated Price')]")
+            # Verify that the estimated price has been calculated
+            try:
+                driver.find_element(By.XPATH, "//div[contains(text(),'$3 M')]")
+                print("Everything is correct. The estimated price is the same.")
+            except NoSuchElementException:
+                print("The estimated price has changed.")
+
             driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
             delay()
 
-            print("TC-2 passed. The user can fill in all boxes")
+            print("TC-031 passed. The user can fill in all boxes")
         except NoSuchElementException:
-            print("TC-2 failed. Is there something wrong")
+            print("TC-031 failed. Is there something wrong")
 
 
         # Verify breadcrumb-component-row
@@ -188,27 +208,18 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_03(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
-        driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
-        driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-        time.sleep(1)
-        driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-        time.sleep(1)
+    def test_032(self):
 
+        driver = self.driver
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
+
+        H.previous_step1(driver)
 
         # Verify Select Flight
         try:
-            driver.execute_script("window.scrollTo(0, 500)")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, 0)")
-            time.sleep(1)
+            H.scroll_down(driver)
 
             driver.find_element(By.XPATH, "//div[@class='results-header'][contains(.,'Available Flights')]")
             driver.find_element(By.XPATH, "//div[@class='see-all-text'][contains(.,'See all flightskeyboard_arrow_right')]")
@@ -226,9 +237,9 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
             delay()
 
-            print("TC-3 passed. The user can select flight")
+            print("TC-032 passed. The user can select flight")
         except NoSuchElementException:
-            print("TC-3 failed. Flight selection not available")
+            print("TC-032 failed. Flight selection not available")
 
         try:
             assert driver.find_element(By.XPATH, "//div[@class='port-selection-header'][contains(.,'Plate Selection')]")
@@ -238,32 +249,22 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_04(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_033(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
-        driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-        time.sleep(1)
-        driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-        time.sleep(1)
-        driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-        time.sleep(1)
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
+
+        H.previous_step2(driver)
 
         # Verify technical information
         try:
-            driver.execute_script("window.scrollTo(0, 500)")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, 0)")
+            H.scroll_down(driver)
 
             driver.find_element(By.XPATH, "//div[@class='port-selection-header'][contains(.,'Plate Selection')]")
             driver.find_element(By.XPATH, "//div[@class='port-selection-subtext'][contains(.,'For technical details, refer to the Rideshare Payload Users Guide. Learn More keyboard_arrow_right')]")
             driver.find_element(By.XPATH, "//span[contains(text(),'Learn More')]").click()
-            time.sleep(2)
+            delay()
 
             window_before = driver.window_handles[0]
             driver.find_element(By.XPATH, "//span[contains(text(),'Learn More')]")
@@ -272,7 +273,7 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.switch_to.window(window_after)
             time.sleep(1)
             driver.switch_to.window(window_before)
-            time.sleep(2)
+            time.sleep(1)
 
             driver.find_element(By.XPATH, "//video[contains(@width,'100%')]")
             driver.find_element(By.XPATH, "(//img[@src='/assets/images/plate_quarter.png'])[1]")
@@ -293,7 +294,7 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, '(//span[@class=\'port-limit-text\'][contains(.,\'24" bolt pattern\')])[3]')
             driver.find_element(By.XPATH, "//div[@class='additional-information-text'][contains(.,'View the Payload Users Guide to make sure your payload meets the requirements.')]")
             driver.find_element(By.XPATH, "//a[contains(text(),'Payload Users Guide')]").click()
-            time.sleep(2)
+            delay()
 
             window_before = driver.window_handles[0]
             driver.find_element(By.XPATH, "//a[contains(text(),'Payload Users Guide')]")
@@ -310,9 +311,9 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
             delay()
 
-            print("TC-4 passed. The user can select technical specifications")
+            print("TC-033 passed. The user can select technical specifications")
         except NoSuchElementException:
-            print("TC-4 failed. Is there something wrong in technical specifications")
+            print("TC-033 failed. Is there something wrong in technical specifications")
 
         try:
             assert driver.find_element(By.XPATH,"//div[@class='page-header header col-12'][contains(.,'Add-ons  Please select from the below optional products and services to add on to your request. learn more keyboard_arrow_right')]")
@@ -323,35 +324,21 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_05(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_034(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
-        driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-        time.sleep(1)
-        driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-        time.sleep(1)
-        driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-        time.sleep(1)
-        driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-        time.sleep(1)
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
+
+        H.previous_step3(driver)
 
         # Verify ADD-ONS
         try:
-            driver.execute_script("window.scrollTo(0, 500)")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, 1050)")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, 0)")
+            H.scroll_down(driver)
 
             driver.find_element(By.XPATH, "//div[@class='page-header header col-12'][contains(.,'Add-ons  Please select from the below optional products and services to add on to your request. learn more keyboard_arrow_right')]")
             driver.find_element(By.XPATH, "//span[contains(text(),'learn more')]").click()
-            time.sleep(1)
+            delay()
 
             window_before = driver.window_handles[0]
             driver.find_element(By.XPATH, "//span[contains(text(),'learn more')]")
@@ -360,7 +347,7 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.switch_to.window(window_after)
             time.sleep(1)
             driver.switch_to.window(window_before)
-            time.sleep(2)
+            time.sleep(1)
 
             driver.find_element(By.XPATH, "//span[@class='mat-checkbox-label'][contains(.,'Mechanical Interface Adapter')]")
             driver.find_element(By.XPATH, "//div[contains(text(),'SpaceX can provide unique interfaces for Payloads ')]")
@@ -374,27 +361,48 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "(//div[contains(@class,'mat-radio-outer-circle')])[3]")
             driver.find_element(By.XPATH, "(//div[contains(@class,'mat-radio-outer-circle')])[2]")
             driver.find_element(By.XPATH, "(//div[contains(@class,'mat-radio-outer-circle')])[1]")
-            driver.find_element(By.XPATH, "//div[contains(@class,'addon-price col-12 col-md-2 ng-star-inserted')]")
+            # Verify that the separation system price has been calculated
+            try:
+                driver.find_element(By.XPATH, "//div[@class='ng-star-inserted'][contains(.,'278,300')]")
+                print("Everything is correct. The separation system price is the same.")
+            except NoSuchElementException:
+                print("The separation system price has changed.")
             driver.find_element(By.XPATH, "//span[@class='mat-checkbox-label'][contains(.,'Payload Electrical Connectivity at Launch Pad')]")
             driver.find_element(By.XPATH, "//div[contains(text(),'SpaceX accommodates electrical connectivity betwee')]")
             driver.find_element(By.XPATH, "(//div[contains(@class,'mat-checkbox-inner-container')])[3]").click()
             driver.find_element(By.XPATH, "//span[@class='mat-checkbox-label'][contains(.,'Fuel Needed')]")
             driver.find_element(By.XPATH, "//div[contains(text(),'Select this option if you will need to fuel your P')]")
-            driver.find_element(By.XPATH, "(//div[contains(@class,'mat-checkbox-inner-container')])[4]")
+            # Verify that the fuel price has been calculated
+            try:
+                driver.find_element(By.XPATH, "//div[contains(text(),'42,350')]")
+                print("Everything is correct. The fuel price is the same.")
+            except NoSuchElementException:
+                print("The fuel price has changed.")
             driver.find_element(By.XPATH, "//span[@class='mat-checkbox-label'][contains(.,'Insurance')]")
             driver.find_element(By.XPATH, "//div[contains(text(),'Select this option if you would like SpaceX to pro')]")
             driver.find_element(By.XPATH, "(//div[contains(@class,'mat-checkbox-inner-container')])[5]").click()
             driver.find_element(By.XPATH, "//input[contains(@autocomplete,'off')]").send_keys("500000")
             delay()
+            # Verify that the insurance price has been calculated
+            try:
+                driver.find_element(By.XPATH, "//div[contains(text(),'25,000')]")
+                print("Everything is correct. The insurance price is the same.")
+            except NoSuchElementException:
+                print("The insurance price has changed.")
             driver.find_element(By.XPATH, "//div[contains(text(),'Current Total with Add-ons')]")
-            driver.find_element(By.XPATH, "//div[contains(@class,'price-amount')]")
+            # Verify that the current total price has been calculated
+            try:
+                driver.find_element(By.XPATH, "//div[contains(text(),'$3,345,650')]")
+                print("The current total price is correct. The amount is the same.")
+            except NoSuchElementException:
+                print("The current total price has changed.")
             driver.find_element(By.XPATH, "//div[contains(text(),'Click to enter contact and payment information. Yo')]")
             driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
             delay()
 
-            print("TC-5 passed. ADD-ONS is correct")
+            print("TC-034 passed. ADD-ONS is correct")
         except NoSuchElementException:
-            print("TC-5 failed. Is there something wrong with ADD-ONS")
+            print("TC-034 failed. Is there something wrong with ADD-ONS")
 
         try:
             assert driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
@@ -405,35 +413,17 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_06(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_035(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
-        driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-        time.sleep(1)
-        driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-        time.sleep(1)
-        driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-        time.sleep(1)
-        driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-        time.sleep(1)
-        driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
-        time.sleep(1)
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
+
+        H.previous_step4(driver)
 
         # Verify Contact Information
         try:
-            driver.execute_script("window.scrollTo(0, 500)")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, 1050)")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, 1500)")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-            time.sleep(1)
-            driver.execute_script("window.scrollTo(0, 0)")
+            H.scroll_down(driver)
 
             driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
             driver.execute_script("window.scrollTo(0, 500)")
@@ -497,9 +487,9 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             phone.send_keys("201-555-0125")
             driver.find_element(By.XPATH, "//div[contains(text(),'Remove')]").click()
 
-            print("TC-6 passed. The user can fill in all boxes")
+            print("TC-35 passed. The user can fill in all boxes")
         except NoSuchElementException:
-            print("TC-6 failed. Is there something wrong")
+            print("TC-35 failed. Is there something wrong")
 
 
         self.driver.quit()
@@ -507,13 +497,14 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
 
 class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
-    def test_01_01(self):
+    def setUp(self):
         self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+
+    def test_013_13(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify search flights
         try:
@@ -531,9 +522,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
             time.sleep(1)
 
-            print("TC-1-1 passed. The user can't search flights")
+            print("TC-013-13 passed. The user can't search flights")
         except NoSuchElementException:
-            print("TC-1-1 failed. Is there something wrong.")
+            print("TC-013-13 failed. Is there something wrong.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -547,32 +538,15 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_02_02(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_014_14(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify Company Information/Company Name not entered
         try:
-            driver = webdriver.Chrome()
-            driver.get("https://rideshare.spacex.com/search")
-            driver.maximize_window()
-
-            driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
-            driver.execute_script("window.scrollTo(0, 500)")
+            H.previous_step5(driver)
 
             company_name = driver.find_element(By.XPATH, "//input[@id='customerBusinessName']")
             company_name.send_keys()
@@ -590,9 +564,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             postal_code = driver.find_element(By.XPATH, "//input[@id='customerPostalCode']")
             postal_code.send_keys("90272")
 
-            print("TC-2-2 passed. The user can't fail to enter Company Name.")
+            print("TC-014-14 passed. The user can't fail to enter Company Name.")
         except NoSuchElementException:
-            print("TC-2-2 failed. Is there something wrong. The user can fail to enter value Company Name.")
+            print("TC-014-14 failed. Is there something wrong. The user can fail to enter value Company Name.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -606,32 +580,15 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_03_03(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_015_15(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify Company Information/Invalid Phone number
         try:
-            driver = webdriver.Chrome()
-            driver.get("https://rideshare.spacex.com/search")
-            driver.maximize_window()
-
-            driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
-            driver.execute_script("window.scrollTo(0, 500)")
+            H.previous_step5(driver)
 
             phone = driver.find_element(By.XPATH, "//input[@id='customerPhone']")
             phone.send_keys("1-201-555-01")
@@ -649,9 +606,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             postal_code = driver.find_element(By.XPATH, "//input[@id='customerPostalCode']")
             postal_code.send_keys("90272")
 
-            print("TC-3-3 passed. The user can't enter invalid phone number.")
+            print("TC-015-15 passed. The user can't enter invalid phone number.")
         except NoSuchElementException:
-            print("TC-3-3 failed. Is there something wrong. The user can enter invalid phone number.")
+            print("TC-015-15 failed. Is there something wrong. The user can enter invalid phone number.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -665,32 +622,15 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_04_04(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_016_16(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify Company Information/Street Address not entered
         try:
-            driver = webdriver.Chrome()
-            driver.get("https://rideshare.spacex.com/search")
-            driver.maximize_window()
-
-            driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
-            driver.execute_script("window.scrollTo(0, 500)")
+            H.previous_step5(driver)
 
             street_address = driver.find_element(By.XPATH, "//input[@id='customerStreetAddress']")
             street_address.send_keys()
@@ -708,9 +648,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             postal_code = driver.find_element(By.XPATH, "//input[@id='customerPostalCode']")
             postal_code.send_keys("90272")
 
-            print("TC-4-4 passed. The user can't fail to enter Street Address.")
+            print("TC-016-16 passed. The user can't fail to enter Street Address.")
         except NoSuchElementException:
-            print("TC-4-4 failed. Is there something wrong. The user can fail to enter value Street Address.")
+            print("TC-016-16 failed. Is there something wrong. The user can fail to enter value Street Address.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -724,32 +664,15 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_05_05(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_017_17(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify Company Information/State not entered
         try:
-            driver = webdriver.Chrome()
-            driver.get("https://rideshare.spacex.com/search")
-            driver.maximize_window()
-
-            driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
-            driver.execute_script("window.scrollTo(0, 500)")
+            H.previous_step5(driver)
 
             state = driver.find_element(By.XPATH, "//input[@id='customerState']")
             state.send_keys()
@@ -767,9 +690,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             postal_code = driver.find_element(By.XPATH, "//input[@id='customerPostalCode']")
             postal_code.send_keys("90272")
 
-            print("TC-5-5 passed. The user can't fail to enter State.")
+            print("TC-017-17 passed. The user can't fail to enter State.")
         except NoSuchElementException:
-            print("TC-5-5 failed. Is there something wrong. The user can fail to enter value State.")
+            print("TC-017-17 failed. Is there something wrong. The user can fail to enter value State.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -783,32 +706,15 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_06_06(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_018_18(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify Company Information/Country not entered
         try:
-            driver = webdriver.Chrome()
-            driver.get("https://rideshare.spacex.com/search")
-            driver.maximize_window()
-
-            driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
-            driver.execute_script("window.scrollTo(0, 500)")
+            H.previous_step5(driver)
 
             country = driver.find_element(By.XPATH, "//input[@id='customerCountry']")
             country.send_keys()
@@ -826,9 +732,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             postal_code = driver.find_element(By.XPATH, "//input[@id='customerPostalCode']")
             postal_code.send_keys("90272")
 
-            print("TC-6-6 passed. The user can't fail to enter Country.")
+            print("TC-018-18 passed. The user can't fail to enter Country.")
         except NoSuchElementException:
-            print("TC-6-6 failed. Is there something wrong. The user can fail to enter value Country.")
+            print("TC-018-18 failed. Is there something wrong. The user can fail to enter value Country.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -842,32 +748,15 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_07_07(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_019_19(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify Company Information/Invalid City
         try:
-            driver = webdriver.Chrome()
-            driver.get("https://rideshare.spacex.com/search")
-            driver.maximize_window()
-
-            driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
-            driver.execute_script("window.scrollTo(0, 500)")
+            H.previous_step5(driver)
 
             company_name = driver.find_element(By.XPATH, "//input[@id='customerBusinessName']")
             company_name.send_keys("ABC Inc")
@@ -887,39 +776,22 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             driver.find_element(By.XPATH, "//div[contains(text(),'Please enter a city')]")
             time.sleep(1)
 
-            print("TC-7-7 passed. The user can't enter invalid City name.")
+            print("TC-019-19 passed. The user can't enter invalid City name.")
         except NoSuchElementException:
-            print("TC-7-7 failed. Is there something wrong. The user can enter invalid City name.")
+            print("TC-019-19 failed. Is there something wrong. The user can enter invalid City name.")
 
 
         self.driver.quit()
 
-    def test_08_08(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_020_20(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify Company Information/Invalid City
         try:
-            driver = webdriver.Chrome()
-            driver.get("https://rideshare.spacex.com/search")
-            driver.maximize_window()
-
-            driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
-            driver.execute_script("window.scrollTo(0, 500)")
+            H.previous_step5(driver)
 
             company_name = driver.find_element(By.XPATH, "//input[@id='customerBusinessName']")
             company_name.send_keys("ABC Inc")
@@ -939,39 +811,22 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             driver.find_element(By.XPATH, "//div[contains(text(),'Please enter a postal code')]")
             time.sleep(1)
 
-            print("TC-8-8 passed. The user can't enter invalid Postal Code.")
+            print("TC-020-20 passed. The user can't enter invalid Postal Code.")
         except NoSuchElementException:
-            print("TC-8-8 failed. Is there something wrong. The user can enter invalid Postal Code")
+            print("TC-020-20 failed. Is there something wrong. The user can enter invalid Postal Code")
 
 
         self.driver.quit()
 
-    def test_09_09(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_021_21(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify Point of contact/Name not entered
         try:
-            driver = webdriver.Chrome()
-            driver.get("https://rideshare.spacex.com/search")
-            driver.maximize_window()
-
-            driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
-            driver.execute_script("window.scrollTo(0, 800)")
+            H.previous_step6(driver)
 
             name = driver.find_element(By.XPATH, "//input[@id='ppocName']")
             name.send_keys()
@@ -981,9 +836,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             phone = driver.find_element(By.XPATH, "//input[@id='ppocPhone']")
             phone.send_keys("201-555-0124")
 
-            print("TC-9-9 passed. The user can't fail to enter value Name.")
+            print("TC-021-21 passed. The user can't fail to enter value Name.")
         except NoSuchElementException:
-            print("TC-9-9 failed. Is there something wrong. The user can fail to enter value Name.")
+            print("TC-021-21 failed. Is there something wrong. The user can fail to enter value Name.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -997,32 +852,15 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_10_10(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_022_22(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify Point of contact/Invalid Email Address
         try:
-            driver = webdriver.Chrome()
-            driver.get("https://rideshare.spacex.com/search")
-            driver.maximize_window()
-
-            driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
-            driver.execute_script("window.scrollTo(0, 800)")
+            H.previous_step6(driver)
 
             email = driver.find_element(By.XPATH, "//input[@id='ppocEmail']")
             email.send_keys("gewofew916@fna6")
@@ -1032,9 +870,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             phone = driver.find_element(By.XPATH, "//input[@id='ppocPhone']")
             phone.send_keys("201-555-0124")
 
-            print("TC-10-10 passed. The user can't enter invalid email address.")
+            print("TC-022-22 passed. The user can't enter invalid email address.")
         except NoSuchElementException:
-            print("TC-10-10 failed. Is there something wrong. The user can enter invalid email address.")
+            print("TC-022-22 failed. Is there something wrong. The user can enter invalid email address.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -1049,32 +887,15 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_11_11(self):
-        self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
-        self.driver.minimize_window()
-        self.driver.maximize_window()
+    def test_023_23(self):
         driver = self.driver
-        driver.get("https://rideshare.spacex.com/search")
+        self.driver.maximize_window()
+
+        driver.get(H.Rideshare_url)
 
         # Verify Point of contact/Invalid Phone Number
         try:
-            driver = webdriver.Chrome()
-            driver.get("https://rideshare.spacex.com/search")
-            driver.maximize_window()
-
-            driver.find_element(By.XPATH, "//input[@id='mat-input-1']").send_keys("500")
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
-            time.sleep(1)
-            driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
-            driver.execute_script("window.scrollTo(0, 800)")
+            H.previous_step6(driver)
 
             phone = driver.find_element(By.XPATH, "//input[@id='ppocPhone']")
             phone.send_keys("201-555-01")
@@ -1084,9 +905,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             email = driver.find_element(By.XPATH, "//input[@id='ppocEmail']")
             email.send_keys("gewofew916@fna6.com")
 
-            print("TC-11-11 passed. The user can't enter invalid phone number.")
+            print("TC-023-23 passed. The user can't enter invalid phone number.")
         except NoSuchElementException:
-            print("TC-11-11 failed. Is there something wrong. The user can enter invalid phone number.")
+            print("TC-023-23 failed. Is there something wrong. The user can enter invalid phone number.")
 
         try:
             wait = WebDriverWait(driver, 2)
