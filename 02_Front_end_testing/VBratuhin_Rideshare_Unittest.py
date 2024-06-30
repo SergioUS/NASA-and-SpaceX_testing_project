@@ -31,7 +31,7 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
 
-    def test_01(self):
+    def test_030(self):
 
         driver = self.driver
         self.driver.maximize_window()
@@ -144,13 +144,13 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             time.sleep(3)
 
 
-            print("TC-1 passed. All icons on the page is displayed")
+            print("TC-030 passed. All icons on the page is displayed")
         except NoSuchElementException:
-            print("TC-1 failed. Some icons on the page is missing")
+            print("TC-030 failed. Some icons on the page is missing")
 
         self.driver.quit()
 
-    def test_02(self):
+    def test_031(self):
 
         driver = self.driver
         self.driver.maximize_window()
@@ -182,9 +182,9 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "//i[contains(text(),'arrow_forward')]").click()
             delay()
 
-            print("TC-2 passed. The user can fill in all boxes")
+            print("TC-031 passed. The user can fill in all boxes")
         except NoSuchElementException:
-            print("TC-2 failed. Is there something wrong")
+            print("TC-031 failed. Is there something wrong")
 
 
         # Verify breadcrumb-component-row
@@ -208,7 +208,7 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_03(self):
+    def test_032(self):
 
         driver = self.driver
         self.driver.maximize_window()
@@ -237,9 +237,9 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "(//a[contains(@class,'arrow-button button wipe')])[2]").click()
             delay()
 
-            print("TC-3 passed. The user can select flight")
+            print("TC-032 passed. The user can select flight")
         except NoSuchElementException:
-            print("TC-3 failed. Flight selection not available")
+            print("TC-032 failed. Flight selection not available")
 
         try:
             assert driver.find_element(By.XPATH, "//div[@class='port-selection-header'][contains(.,'Plate Selection')]")
@@ -249,7 +249,7 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_04(self):
+    def test_033(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -311,9 +311,9 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "(//i[@class='material-icons'][contains(.,'arrow_forward')])[4]").click()
             delay()
 
-            print("TC-4 passed. The user can select technical specifications")
+            print("TC-033 passed. The user can select technical specifications")
         except NoSuchElementException:
-            print("TC-4 failed. Is there something wrong in technical specifications")
+            print("TC-033 failed. Is there something wrong in technical specifications")
 
         try:
             assert driver.find_element(By.XPATH,"//div[@class='page-header header col-12'][contains(.,'Add-ons  Please select from the below optional products and services to add on to your request. learn more keyboard_arrow_right')]")
@@ -324,7 +324,7 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_05(self):
+    def test_034(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -400,9 +400,9 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             driver.find_element(By.XPATH, "//a[contains(text(),'Continue')]").click()
             delay()
 
-            print("TC-5 passed. ADD-ONS is correct")
+            print("TC-034 passed. ADD-ONS is correct")
         except NoSuchElementException:
-            print("TC-5 failed. Is there something wrong with ADD-ONS")
+            print("TC-034 failed. Is there something wrong with ADD-ONS")
 
         try:
             assert driver.find_element(By.XPATH, "//div[contains(text(),'Contact Information')]")
@@ -413,7 +413,7 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_06(self):
+    def test_035(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -487,9 +487,9 @@ class Spacex_Rideshare_01_Positive(unittest.TestCase):
             phone.send_keys("201-555-0125")
             driver.find_element(By.XPATH, "//div[contains(text(),'Remove')]").click()
 
-            print("TC-6 passed. The user can fill in all boxes")
+            print("TC-35 passed. The user can fill in all boxes")
         except NoSuchElementException:
-            print("TC-6 failed. Is there something wrong")
+            print("TC-35 failed. Is there something wrong")
 
 
         self.driver.quit()
@@ -500,7 +500,7 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
 
-    def test_01_01(self):
+    def test_013_13(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -522,9 +522,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
             time.sleep(1)
 
-            print("TC-1-1 passed. The user can't search flights")
+            print("TC-013-13 passed. The user can't search flights")
         except NoSuchElementException:
-            print("TC-1-1 failed. Is there something wrong.")
+            print("TC-013-13 failed. Is there something wrong.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -538,7 +538,7 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_02_02(self):
+    def test_014_14(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -564,9 +564,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             postal_code = driver.find_element(By.XPATH, "//input[@id='customerPostalCode']")
             postal_code.send_keys("90272")
 
-            print("TC-2-2 passed. The user can't fail to enter Company Name.")
+            print("TC-014-14 passed. The user can't fail to enter Company Name.")
         except NoSuchElementException:
-            print("TC-2-2 failed. Is there something wrong. The user can fail to enter value Company Name.")
+            print("TC-014-14 failed. Is there something wrong. The user can fail to enter value Company Name.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -580,7 +580,7 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_03_03(self):
+    def test_015_15(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -606,9 +606,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             postal_code = driver.find_element(By.XPATH, "//input[@id='customerPostalCode']")
             postal_code.send_keys("90272")
 
-            print("TC-3-3 passed. The user can't enter invalid phone number.")
+            print("TC-015-15 passed. The user can't enter invalid phone number.")
         except NoSuchElementException:
-            print("TC-3-3 failed. Is there something wrong. The user can enter invalid phone number.")
+            print("TC-015-15 failed. Is there something wrong. The user can enter invalid phone number.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -622,7 +622,7 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_04_04(self):
+    def test_016_16(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -648,9 +648,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             postal_code = driver.find_element(By.XPATH, "//input[@id='customerPostalCode']")
             postal_code.send_keys("90272")
 
-            print("TC-4-4 passed. The user can't fail to enter Street Address.")
+            print("TC-016-16 passed. The user can't fail to enter Street Address.")
         except NoSuchElementException:
-            print("TC-4-4 failed. Is there something wrong. The user can fail to enter value Street Address.")
+            print("TC-016-16 failed. Is there something wrong. The user can fail to enter value Street Address.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -664,7 +664,7 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_05_05(self):
+    def test_017_17(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -690,9 +690,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             postal_code = driver.find_element(By.XPATH, "//input[@id='customerPostalCode']")
             postal_code.send_keys("90272")
 
-            print("TC-5-5 passed. The user can't fail to enter State.")
+            print("TC-017-17 passed. The user can't fail to enter State.")
         except NoSuchElementException:
-            print("TC-5-5 failed. Is there something wrong. The user can fail to enter value State.")
+            print("TC-017-17 failed. Is there something wrong. The user can fail to enter value State.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -706,7 +706,7 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_06_06(self):
+    def test_018_18(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -732,9 +732,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             postal_code = driver.find_element(By.XPATH, "//input[@id='customerPostalCode']")
             postal_code.send_keys("90272")
 
-            print("TC-6-6 passed. The user can't fail to enter Country.")
+            print("TC-018-18 passed. The user can't fail to enter Country.")
         except NoSuchElementException:
-            print("TC-6-6 failed. Is there something wrong. The user can fail to enter value Country.")
+            print("TC-018-18 failed. Is there something wrong. The user can fail to enter value Country.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -748,7 +748,7 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_07_07(self):
+    def test_019_19(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -776,14 +776,14 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             driver.find_element(By.XPATH, "//div[contains(text(),'Please enter a city')]")
             time.sleep(1)
 
-            print("TC-7-7 passed. The user can't enter invalid City name.")
+            print("TC-019-19 passed. The user can't enter invalid City name.")
         except NoSuchElementException:
-            print("TC-7-7 failed. Is there something wrong. The user can enter invalid City name.")
+            print("TC-019-19 failed. Is there something wrong. The user can enter invalid City name.")
 
 
         self.driver.quit()
 
-    def test_08_08(self):
+    def test_020_20(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -811,14 +811,14 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             driver.find_element(By.XPATH, "//div[contains(text(),'Please enter a postal code')]")
             time.sleep(1)
 
-            print("TC-8-8 passed. The user can't enter invalid Postal Code.")
+            print("TC-020-20 passed. The user can't enter invalid Postal Code.")
         except NoSuchElementException:
-            print("TC-8-8 failed. Is there something wrong. The user can enter invalid Postal Code")
+            print("TC-020-20 failed. Is there something wrong. The user can enter invalid Postal Code")
 
 
         self.driver.quit()
 
-    def test_09_09(self):
+    def test_021_21(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -836,9 +836,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             phone = driver.find_element(By.XPATH, "//input[@id='ppocPhone']")
             phone.send_keys("201-555-0124")
 
-            print("TC-9-9 passed. The user can't fail to enter value Name.")
+            print("TC-021-21 passed. The user can't fail to enter value Name.")
         except NoSuchElementException:
-            print("TC-9-9 failed. Is there something wrong. The user can fail to enter value Name.")
+            print("TC-021-21 failed. Is there something wrong. The user can fail to enter value Name.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -852,7 +852,7 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_10_10(self):
+    def test_022_22(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -870,9 +870,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             phone = driver.find_element(By.XPATH, "//input[@id='ppocPhone']")
             phone.send_keys("201-555-0124")
 
-            print("TC-10-10 passed. The user can't enter invalid email address.")
+            print("TC-022-22 passed. The user can't enter invalid email address.")
         except NoSuchElementException:
-            print("TC-10-10 failed. Is there something wrong. The user can enter invalid email address.")
+            print("TC-022-22 failed. Is there something wrong. The user can enter invalid email address.")
 
         try:
             wait = WebDriverWait(driver, 2)
@@ -887,7 +887,7 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
 
         self.driver.quit()
 
-    def test_11_11(self):
+    def test_023_23(self):
         driver = self.driver
         self.driver.maximize_window()
 
@@ -905,9 +905,9 @@ class Spacex_Rideshare_02_Negative(unittest.TestCase):
             email = driver.find_element(By.XPATH, "//input[@id='ppocEmail']")
             email.send_keys("gewofew916@fna6.com")
 
-            print("TC-11-11 passed. The user can't enter invalid phone number.")
+            print("TC-023-23 passed. The user can't enter invalid phone number.")
         except NoSuchElementException:
-            print("TC-11-11 failed. Is there something wrong. The user can enter invalid phone number.")
+            print("TC-023-23 failed. Is there something wrong. The user can enter invalid phone number.")
 
         try:
             wait = WebDriverWait(driver, 2)
