@@ -1,0 +1,473 @@
+{
+	"info": {
+		"_postman_id": "cd3e7163-7949-44fd-b937-3c747d80e3c2",
+		"name": "SpaceX_API_Rockets_VolhaBrtuhin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34748278"
+	},
+	"item": [
+		{
+			"name": "Get all Rockets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test1. Validate status code\r",
+							"if (responseCode.code === 200) {\r",
+							"    tests[\"Backend is available, response code is 200\"] = true;\r",
+							"} else if (responseCode.code === 401) {\r",
+							"    tests[\"Not authorised, Check access token or Log in\"] = false;\r",
+							"} else if (responseCode.code === 403) {\r",
+							"    tests[\"Forbiden\"] = false;\r",
+							"} else if (responseCode.code === 404) {\r",
+							"    tests[\"Not Found. Check if you made correct request\"] = false;\r",
+							"} else if (responseCode.code === 422) {\r",
+							"    tests[\"The instance is not valid\"] = false;\r",
+							"} else {\r",
+							"    tests[\"Something went wrong. Check response body\"] = false;\r",
+							"}\r",
+							"\r",
+							"//Test2. Validate the response time\r",
+							"pm.test(\"Response time is less than 3000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+							"});\r",
+							"\r",
+							"//Test3. Validate the response size\r",
+							"pm.test(\"Response size is less than 50KB\", function () {\r",
+							"    pm.expect(pm.response.responseSize).to.be.below(51200);\r",
+							"});\r",
+							"\r",
+							"//Test4. Response should be okay to process\r",
+							"pm.test(\"Response should be okay to process\", function () {\r",
+							"    pm.response.to.not.be.error;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.not.have.jsonBody(\"error\");\r",
+							"});\r",
+							"\r",
+							"//Test5. Verify response headers\r",
+							"pm.test(\"Response Header is present and correct\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"    pm.response.to.have.header(\"access-control-expose-headers\", \"spacex-api-cache,spacex-api-response-time\");\r",
+							"    pm.response.to.have.header(\"Connection\", \"keep-alive\");\r",
+							"    pm.response.to.have.header(\"Content-Encoding\", \"gzip\");\r",
+							"    pm.response.to.have.header(\"CF-Cache-Status\", \"DYNAMIC\");\r",
+							"    pm.response.to.have.header(\"X-Content-Type-Options\", \"nosniff\");\r",
+							"    pm.response.to.have.header(\"X-Frame-Options\", \"SAMEORIGIN\");\r",
+							"    pm.response.to.have.header(\"Server\", \"cloudflare\");\r",
+							"});\r",
+							"\r",
+							"//Test6. Verify response body\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"height\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"meters\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"diameter\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"mass\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"first_stage\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"thrust_sea_level\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"reusable\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"second_stage\");\r",
+							"});\r",
+							"\r",
+							"//Test7. Verify response value\r",
+							"pm.test(\"Value is correct\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].height.meters).to.eql(22.25);\r",
+							"    pm.expect(jsonData[0].diameter.feet).to.eql(5.5);\r",
+							"    pm.expect(jsonData[0].first_stage.thrust_sea_level.kN).to.eql(420);\r",
+							"    pm.expect(jsonData[0].second_stage.thrust.lbf).to.eql(7000);\r",
+							"    pm.expect(jsonData[0].second_stage.payloads.composite_fairing.height.meters).to.eql(3.5);\r",
+							"    pm.expect(jsonData[0].name).to.eql(\"Falcon 1\");\r",
+							"    pm.expect(jsonData[0].company).to.eql(\"SpaceX\");\r",
+							"    pm.expect(jsonData[0].wikipedia).to.eql(\"https://en.wikipedia.org/wiki/Falcon_1\");\r",
+							"    pm.expect(jsonData[0].id).to.eql(\"5e9d0d95eda69955f709d1eb\");\r",
+							"});\r",
+							"\r",
+							"//Test8. Verify response body format\r",
+							"pm.test(\"Response body should be in the correct format\", function () {\r",
+							"    let jsonResponse = pm.response.json();\r",
+							"    pm.expect(jsonResponse[0].height.meters).to.be.a(\"number\");\r",
+							"    pm.expect(jsonResponse[0].first_stage.thrust_sea_level.kN).to.be.a(\"number\");\r",
+							"    pm.expect(jsonResponse[0].second_stage.payloads.composite_fairing.height.meters).to.be.a(\"number\");\r",
+							"    pm.expect(jsonResponse[0].name).to.be.a(\"string\");\r",
+							"    pm.expect(jsonResponse[0].company).to.be.a(\"string\");\r",
+							"    pm.expect(jsonResponse[0].wikipedia).to.be.a(\"string\");\r",
+							"    pm.expect(jsonResponse[0].id).to.be.a(\"string\");\r",
+							"});\r",
+							"\r",
+							"//Test9. Verify the length of the response data\r",
+							"pm.test(\"The response data length must be greater than zero\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(Object.keys(responseData).length).to.be.above(0, \"Response data should not be empty\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "spacex-key",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}",
+					"host": [
+						"{{URL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one Rocket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test1. Validate status code\r",
+							"if (responseCode.code === 200) {\r",
+							"    tests[\"Backend is available, response code is 200\"] = true;\r",
+							"} else if (responseCode.code === 401) {\r",
+							"    tests[\"Not authorised, Check access token or Log in\"] = false;\r",
+							"} else if (responseCode.code === 403) {\r",
+							"    tests[\"Forbiden\"] = false;\r",
+							"} else if (responseCode.code === 404) {\r",
+							"    tests[\"Not Found. Check if you made correct request\"] = false;\r",
+							"} else if (responseCode.code === 422) {\r",
+							"    tests[\"The instance is not valid\"] = false;\r",
+							"} else {\r",
+							"    tests[\"Something went wrong. Check response body\"] = false;\r",
+							"}\r",
+							"\r",
+							"//Test2. Validate the response time\r",
+							"pm.test(\"Response time is less than 3000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+							"});\r",
+							"\r",
+							"//Test3. Validate the response size\r",
+							"pm.test(\"Response size is less than 50KB\", function () {\r",
+							"    pm.expect(pm.response.responseSize).to.be.below(51200);\r",
+							"});\r",
+							"\r",
+							"//Test4. Response should be okay to process\r",
+							"pm.test(\"Response should be okay to process\", function () {\r",
+							"    pm.response.to.not.be.error;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.not.have.jsonBody(\"error\");\r",
+							"});\r",
+							"\r",
+							"//Test5. Verify response headers\r",
+							"pm.test(\"Response Header is present and correct\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"    pm.response.to.have.header(\"access-control-expose-headers\", \"spacex-api-cache,spacex-api-response-time\");\r",
+							"    pm.response.to.have.header(\"Connection\", \"keep-alive\");\r",
+							"    pm.response.to.have.header(\"Content-Encoding\", \"gzip\");\r",
+							"    pm.response.to.have.header(\"CF-Cache-Status\", \"DYNAMIC\");\r",
+							"    pm.response.to.have.header(\"X-Content-Type-Options\", \"nosniff\");\r",
+							"    pm.response.to.have.header(\"X-Frame-Options\", \"SAMEORIGIN\");\r",
+							"    pm.response.to.have.header(\"Server\", \"cloudflare\");\r",
+							"});\r",
+							"\r",
+							"//Test6. Verify response body\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"height\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"diameter\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"first_stage\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"thrust_sea_level\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"reusable\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"second_stage\");\r",
+							"});\r",
+							"\r",
+							"//Test7. Response contains correct text\r",
+							"pm.test(\"Response contains correct text\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(pm.environment.get(\"NAME\"));\r",
+							"    pm.expect(pm.response.text()).to.include(pm.environment.get(\"COMPANY\"));\r",
+							"    pm.expect(pm.response.text()).to.include(pm.environment.get(\"WIKI\"));\r",
+							"    pm.expect(pm.response.text()).to.include.toString(pm.environment.get(\"HM\"));\r",
+							"    pm.expect(pm.response.text()).to.include.toString(pm.environment.get(\"FSTKN\"));\r",
+							"    pm.expect(pm.response.text()).to.include.toString(pm.environment.get(\"SSPHF\"));\r",
+							"});\r",
+							"\r",
+							"//Test8. Verify response value\r",
+							"pm.test(\"Value is correct\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.height.meters).to.eql.toString(pm.environment.get(\"HM\"));\r",
+							"    pm.expect(jsonData.diameter.feet).to.eql.toString(pm.environment.get(\"DF\"));\r",
+							"    pm.expect(jsonData.first_stage.thrust_sea_level.kN).to.eql.toString(pm.environment.get(\"FSTKN\"));\r",
+							"    pm.expect(jsonData.second_stage.thrust.lbf).to.eql.toString(pm.environment.get(\"SSTLBF\"));\r",
+							"    pm.expect(jsonData.second_stage.payloads.composite_fairing.height.meters).to.eql.toString(pm.environment.get(\"SSPHM\"));\r",
+							"    pm.expect(jsonData.name).to.eql(pm.environment.get(\"NAME\"));\r",
+							"    pm.expect(jsonData.company).to.eql(pm.environment.get(\"COMPANY\"));\r",
+							"    pm.expect(jsonData.wikipedia).to.eql(pm.environment.get(\"WIKI\"));\r",
+							"    pm.expect(jsonData.id).to.eql(pm.environment.get(\"RocketsID\"));\r",
+							"});\r",
+							"\r",
+							"//Test9. Verify response body format\r",
+							"pm.test(\"Response body should be in the correct format\", function () {\r",
+							"    let jsonResponse = pm.response.json();\r",
+							"    pm.expect(jsonResponse.height.meters).to.be.a(\"number\");\r",
+							"    pm.expect(jsonResponse.first_stage.thrust_sea_level.kN).to.be.a(\"number\");\r",
+							"    pm.expect(jsonResponse.second_stage.payloads.composite_fairing.height.meters).to.be.a(\"number\");\r",
+							"    pm.expect(jsonResponse.name).to.be.a(\"string\");\r",
+							"    pm.expect(jsonResponse.company).to.be.a(\"string\");\r",
+							"    pm.expect(jsonResponse.wikipedia).to.be.a(\"string\");\r",
+							"    pm.expect(jsonResponse.id).to.be.a(\"string\");\r",
+							"});\r",
+							"\r",
+							"//Test10. Verify the length of the response data\r",
+							"pm.test(\"The response data length must be greater than zero\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(Object.keys(responseData).length).to.be.above(0, \"Response data should not be empty\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "spacex-key",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.spacexdata.com/v4/rockets/{{RocketsID}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spacexdata",
+						"com"
+					],
+					"path": [
+						"v4",
+						"rockets",
+						"{{RocketsID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Rockets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test1. Validate status code\r",
+							"if (responseCode.code === 200) {\r",
+							"    tests[\"Backend is available, response code is 200\"] = true;\r",
+							"} else if (responseCode.code === 401) {\r",
+							"    tests[\"Not authorised, Check access token or Log in\"] = false;\r",
+							"} else if (responseCode.code === 403) {\r",
+							"    tests[\"Forbiden\"] = false;\r",
+							"} else if (responseCode.code === 404) {\r",
+							"    tests[\"Not Found. Check if you made correct request\"] = false;\r",
+							"} else if (responseCode.code === 422) {\r",
+							"    tests[\"The instance is not valid\"] = false;\r",
+							"} else {\r",
+							"    tests[\"Something went wrong. Check response body\"] = false;\r",
+							"}\r",
+							"\r",
+							"//Test2. Validate the response time\r",
+							"pm.test(\"Response time is less than 3000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+							"});\r",
+							"\r",
+							"//Test3. Validate the response size\r",
+							"pm.test(\"Response size is less than 50KB\", function () {\r",
+							"    pm.expect(pm.response.responseSize).to.be.below(51200);\r",
+							"});\r",
+							"\r",
+							"//Test4. Response should be okay to process\r",
+							"pm.test(\"Response should be okay to process\", function () {\r",
+							"    pm.response.to.not.be.error;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.not.have.jsonBody(\"error\");\r",
+							"});\r",
+							"\r",
+							"//Test5. Verify response headers\r",
+							"pm.test(\"Response Header is present and correct\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"    pm.response.to.have.header(\"access-control-expose-headers\", \"spacex-api-cache,spacex-api-response-time\");\r",
+							"    pm.response.to.have.header(\"Connection\", \"keep-alive\");\r",
+							"    pm.response.to.have.header(\"Content-Encoding\", \"gzip\");\r",
+							"    pm.response.to.have.header(\"CF-Cache-Status\", \"DYNAMIC\");\r",
+							"    pm.response.to.have.header(\"X-Content-Type-Options\", \"nosniff\");\r",
+							"    pm.response.to.have.header(\"X-Frame-Options\", \"SAMEORIGIN\");\r",
+							"    pm.response.to.have.header(\"Server\", \"cloudflare\");\r",
+							"});\r",
+							"\r",
+							"//Test6. Verify response body\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"height\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"meters\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"diameter\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"mass\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"first_stage\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"thrust_sea_level\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"reusable\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"second_stage\");\r",
+							"});\r",
+							"\r",
+							"//Test7. Verify response value\r",
+							"pm.test(\"Value is correct\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.docs[0].height.meters).to.eql(22.25);\r",
+							"    pm.expect(jsonData.docs[0].diameter.feet).to.eql(5.5);\r",
+							"    pm.expect(jsonData.docs[0].first_stage.thrust_sea_level.kN).to.eql(420);\r",
+							"    pm.expect(jsonData.docs[0].second_stage.thrust.lbf).to.eql(7000);\r",
+							"    pm.expect(jsonData.docs[0].second_stage.payloads.composite_fairing.height.meters).to.eql(3.5);\r",
+							"    pm.expect(jsonData.docs[0].name).to.eql(\"Falcon 1\");\r",
+							"    pm.expect(jsonData.docs[0].company).to.eql(\"SpaceX\");\r",
+							"    pm.expect(jsonData.docs[0].wikipedia).to.eql(\"https://en.wikipedia.org/wiki/Falcon_1\");\r",
+							"    pm.expect(jsonData.docs[0].id).to.eql(\"5e9d0d95eda69955f709d1eb\");\r",
+							"});\r",
+							"\r",
+							"//Test8. Verify response body format\r",
+							"pm.test(\"Response body should be in the correct format\", function () {\r",
+							"    let jsonResponse = pm.response.json();\r",
+							"    pm.expect(jsonResponse.docs[0].height.meters).to.be.a(\"number\");\r",
+							"    pm.expect(jsonResponse.docs[0].first_stage.thrust_sea_level.kN).to.be.a(\"number\");\r",
+							"    pm.expect(jsonResponse.docs[0].second_stage.payloads.composite_fairing.height.meters).to.be.a(\"number\");\r",
+							"    pm.expect(jsonResponse.docs[0].name).to.be.a(\"string\");\r",
+							"    pm.expect(jsonResponse.docs[0].company).to.be.a(\"string\");\r",
+							"    pm.expect(jsonResponse.docs[0].wikipedia).to.be.a(\"string\");\r",
+							"    pm.expect(jsonResponse.docs[0].id).to.be.a(\"string\");\r",
+							"});\r",
+							" \r",
+							"//Test9. Verify that the response contains the required fields\r",
+							"pm.test(\"Response contains required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    responseData.docs.forEach(function(docs) {\r",
+							"        pm.expect(responseData.docs[0]).to.have.property('height').that.is.an('Object').and.not.empty;\r",
+							"        pm.expect(responseData.docs[0]).to.have.property('diameter').that.is.an('Object').and.not.empty;\r",
+							"        pm.expect(responseData.docs[0]).to.have.property('mass').that.is.an('Object').and.not.empty;\r",
+							"        pm.expect(responseData.docs[0]).to.have.property('first_stage').that.is.an('Object').and.not.empty;\r",
+							"        pm.expect(responseData.docs[0]).to.have.property('second_stage').that.is.an('Object').and.not.empty;\r",
+							"        pm.expect(responseData.docs[0]).to.have.property('engines').that.is.an('Object').and.not.empty;\r",
+							"        pm.expect(responseData.docs[0]).to.have.property('landing_legs').that.is.an('Object').and.not.empty;\r",
+							"        pm.expect(responseData.docs[0]).to.have.property('payload_weights').that.is.an('array').and.not.empty;\r",
+							"        pm.expect(responseData.docs[0]).to.have.property('name').that.is.an('string').and.not.empty;\r",
+							"        pm.expect(responseData.docs[0]).to.have.property('company').that.is.an('string').and.not.empty;\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"//Test10. Verify response property, format and length\r",
+							"pm.test(\"Verify response property, format and length\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData).to.have.property('docs').that.is.an('array').with.length.above(0);\r",
+							"});\r",
+							"\r",
+							"//Test11. Verify the length of the response data\r",
+							"pm.test(\"The response data length must be greater than zero\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(Object.keys(responseData).length).to.be.above(0, \"Response data should not be empty\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "spacex-key",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/query",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"query"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "spacex-key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
