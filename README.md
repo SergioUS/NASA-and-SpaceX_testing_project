@@ -16,6 +16,10 @@
 
 [Andrei Markovich](https://www.linkedin.com/in/andrei-markovich)
 
+[Julia Delmar](https://www.linkedin.com/in/julia-delmar/)
+
+[Natalia Skubii](https://www.linkedin.com/in/natalia-skubii/)
+
 [Tatsiana Lentz](https://www.linkedin.com/in/tatsianalentz/)
 
 [Valentina Matikaynen](https://www.linkedin.com/in/valentina-matikaynen)
