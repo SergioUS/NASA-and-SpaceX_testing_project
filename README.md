@@ -16,6 +16,8 @@
 
 [Andrei Markovich](https://www.linkedin.com/in/andrei-markovich)
 
+[Elena Olkhovskaia](https://www.linkedin.com/in/elena-olkhovskaia)
+
 [Julia Delmar](https://www.linkedin.com/in/julia-delmar/)
 
 [Natalia Skubii](https://www.linkedin.com/in/natalia-skubii/)
