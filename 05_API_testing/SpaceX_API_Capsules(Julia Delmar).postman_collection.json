@@ -1,0 +1,378 @@
+{
+	"info": {
+		"_postman_id": "a472523d-9115-469c-b5cf-6be82070e211",
+		"name": "SpaceX_API_Capsules(Julia Delmar)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36311316"
+	},
+	"item": [
+		{
+			"name": "Capsules",
+			"item": [
+				{
+					"name": "Query capsules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"pm.test(\"Response size is less than 500B\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Header is correct\", function () {\r",
+									"   pm.response.to.have.header(\"Content-Type\",\"application/json; charset=utf-8\");\r",
+									"   pm.response.to.have.header(\"Content-Length\",\"703\");\r",
+									"   pm.response.to.have.header(\"Connection\",\"keep-alive\");\r",
+									"   pm.response.to.have.header(\"access-control-allow-origin\",\"*\");\r",
+									"   pm.response.to.have.header(\"access-control-expose-headers\",\"spacex-api-cache,spacex-api-response-time\");\r",
+									"   pm.response.to.have.header(\"Cache-Control\", \"max-age=300\");\r",
+									"   pm.response.to.have.header(\"Content-Encoding\",\"gzip\");\r",
+									"   pm.response.to.have.header(\"expect-ct\",\"max-age=0\");\r",
+									"   pm.response.to.have.header(\"referrer-policy\",\"no-referrer\");\r",
+									"   pm.response.to.have.header(\"spacex-api-cache-online\", \"true\");\r",
+									"   pm.response.to.have.header(\"vary\",\"Accept-Encoding\");\r",
+									"   pm.response.to.have.header(\"x-content-type-options\",\"nosniff\");\r",
+									"   pm.response.to.have.header(\"x-dns-prefetch-control\",\"off\");\r",
+									"   pm.response.to.have.header(\"x-download-options\",\"noopen\");\r",
+									"   pm.response.to.have.header(\"x-frame-options\",\"SAMEORIGIN\");\r",
+									"   pm.response.to.have.header(\"x-permitted-cross-domain-policies\",\"none\");\r",
+									"   pm.response.to.have.header(\"x-xss-protection\", \"0\");\r",
+									"   pm.response.to.have.header(\"CF-Cache-Status\",\"DYNAMIC\");\r",
+									"   pm.response.to.have.header(\"Server\",\"cloudflare\");\r",
+									"   });\r",
+									"\r",
+									"  \r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {},\r\n    \"options\": {}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.spacexdata.com/v4/capsules/query",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spacexdata",
+								"com"
+							],
+							"path": [
+								"v4",
+								"capsules",
+								"query"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all capsules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// One more way to set Env Var \"capsuleID\"\r",
+									"let jsonData = pm.response.json();\r",
+									"pm.environment.set(\"capsuleID\", jsonData[0].id);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"pm.test(\"Response size is less than 500B\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(7000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Header is correct\", function () {\r",
+									"   pm.response.to.have.header(\"Content-Type\",\"application/json; charset=utf-8\");\r",
+									"   pm.response.to.have.header(\"Content-Length\",\"1463\");\r",
+									"   pm.response.to.have.header(\"Connection\",\"keep-alive\");\r",
+									"   pm.response.to.have.header(\"access-control-allow-origin\",\"*\");\r",
+									"   pm.response.to.have.header(\"access-control-expose-headers\",\"spacex-api-cache,spacex-api-response-time\");\r",
+									"   pm.response.to.have.header(\"Cache-Control\", \"max-age=300\");\r",
+									"   pm.response.to.have.header(\"Content-Encoding\",\"gzip\");\r",
+									"   pm.response.to.have.header(\"expect-ct\",\"max-age=0\");\r",
+									"   pm.response.to.have.header(\"referrer-policy\",\"no-referrer\");\r",
+									"   pm.response.to.have.header(\"spacex-api-cache-online\", \"true\");\r",
+									"   pm.response.to.have.header(\"vary\",\"Accept-Encoding\");\r",
+									"   pm.response.to.have.header(\"x-content-type-options\",\"nosniff\");\r",
+									"   pm.response.to.have.header(\"x-dns-prefetch-control\",\"off\");\r",
+									"   pm.response.to.have.header(\"x-download-options\",\"noopen\");\r",
+									"   pm.response.to.have.header(\"x-frame-options\",\"SAMEORIGIN\");\r",
+									"   pm.response.to.have.header(\"x-permitted-cross-domain-policies\",\"none\");\r",
+									"   pm.response.to.have.header(\"x-xss-protection\", \"0\");\r",
+									"   pm.response.to.have.header(\"CF-Cache-Status\",\"DYNAMIC\");\r",
+									"   pm.response.to.have.header(\"Server\",\"cloudflare\");\r",
+									"   });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.spacexdata.com/v4/capsules",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spacexdata",
+								"com"
+							],
+							"path": [
+								"v4",
+								"capsules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a capsule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(responseCode.code === 200) {\r",
+									"    tests[\"Backend is available, response code is 200\"] = false;\r",
+									"} else if (responseCode.code === 401) {\r",
+									"    tests[\"Not authorised, Check access token or Log in\"] = true;\r",
+									"} else if (responseCode.code === 403) {\r",
+									"    tests[\"Forbiden\"] = false;\r",
+									"} else if (responseCode.code === 404) {\r",
+									"    tests[\"Not Found. Check if you made correct request\"] = false;\r",
+									"} else if (responseCode.code === 422) {\r",
+									"    tests[\"The instance is not valid\"] = false;\r",
+									"} else {\r",
+									"    tests[\"Something went wrong. Check response body\"] = false;\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"pm.test(\"Response size is less than 500B\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Header is correct\", function () {\r",
+									"   pm.response.to.have.header(\"Content-Type\",\"text/plain; charset=utf-8\");\r",
+									"   pm.response.to.have.header(\"Content-Length\",\"28\");\r",
+									"   pm.response.to.have.header(\"Connection\",\"keep-alive\");\r",
+									"   pm.response.to.have.header(\"access-control-allow-origin\",\"*\");\r",
+									"   pm.response.to.have.header(\"access-control-expose-headers\",\"spacex-api-cache,spacex-api-response-time\");\r",
+									"   pm.response.to.have.header(\"expect-ct\",\"max-age=0\");\r",
+									"   pm.response.to.have.header(\"referrer-policy\",\"no-referrer\");\r",
+									"   pm.response.to.have.header(\"vary\",\"Origin\");\r",
+									"   pm.response.to.have.header(\"x-content-type-options\",\"nosniff\");\r",
+									"   pm.response.to.have.header(\"x-dns-prefetch-control\",\"off\");\r",
+									"   pm.response.to.have.header(\"x-download-options\",\"noopen\");\r",
+									"   pm.response.to.have.header(\"x-frame-options\",\"SAMEORIGIN\");\r",
+									"   pm.response.to.have.header(\"x-permitted-cross-domain-policies\",\"none\");\r",
+									"   pm.response.to.have.header(\"x-xss-protection\", \"0\");\r",
+									"   pm.response.to.have.header(\"CF-Cache-Status\",\"DYNAMIC\");\r",
+									"   pm.response.to.have.header(\"Server\",\"cloudflare\");\r",
+									"   });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "spacex-key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.spacexdata.com/v4/capsules/{{capsuleID}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spacexdata",
+								"com"
+							],
+							"path": [
+								"v4",
+								"capsules",
+								"{{capsuleID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company Info",
+			"item": [
+				{
+					"name": "Get Company Info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// One more way to set Env Var \"infoID\"\r",
+									"let jsonData = pm.response.json();\r",
+									"pm.environment.set(\"infoID\", jsonData.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.spacexdata.com/v4/company",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spacexdata",
+								"com"
+							],
+							"path": [
+								"v4",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Company Info",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "spacex-key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "https://api.spacexdata.com/v4/company/{{infoID}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spacexdata",
+								"com"
+							],
+							"path": [
+								"v4",
+								"company",
+								"{{infoID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
