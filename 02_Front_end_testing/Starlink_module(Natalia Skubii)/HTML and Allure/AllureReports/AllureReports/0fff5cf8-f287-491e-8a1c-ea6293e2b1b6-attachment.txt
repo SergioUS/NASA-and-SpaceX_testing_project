@@ -1,0 +1,2 @@
+Test Case 032_32
+WARNING! Test Case 032_32 failed!
