@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "5ed8723c-baab-4710-aa65-ef7a7d3d66d2",
+		"name": "NASA_SpaceX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "38033375"
+	},
+	"item": [
+		{
+			"name": "Vesta/Moon/Mars",
+			"item": [
+				{
+					"name": "Vesta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body time is within acceptable range\", function () {\r",
+									"    const minTime = 100; \r",
+									"    const maxTime = 1000; \r",
+									"    const bodyTime = pm.response.responseTime; \r",
+									"\r",
+									"    pm.expect(bodyTime).to.be.within(minTime, maxTime);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response size is less than 30000B\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(30000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is not null\", function () {\r",
+									"    pm.expect(pm.response.text()).to.not.equal(null);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is in a valid image format\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"image/png\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response schema validation for image/png format\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"image/png\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Header is correct\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"image/png\");\r",
+									"    pm.response.to.have.header(\"Content-Length\", \"25913\");\r",
+									"    pm.response.to.have.header(\"Connection\", \"keep-alive\");\r",
+									"    pm.response.to.have.header(\"Accept-Ranges\", \"bytes\");\r",
+									"    pm.response.to.have.header(\"Access-Control-Allow-Origin\", \"*\");\r",
+									"    pm.response.to.have.header(\"Strict-Transport-Security\", \"max-age=31536000; includeSubDomains; preload\");\r",
+									"    pm.response.to.have.header(\"Via\", \"https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])\");\r",
+									"    pm.response.to.have.header(\"X-Cache\", \"MISS\");\r",
+									"    pm.response.to.have.header(\"X-Content-Type-Options\", \"nosniff\");\r",
+									"    pm.response.to.have.header(\"X-Xss-Protection\", \"1; mode=block\");\r",
+									"    pm.response.to.have.header(\"X-Frame-Options\", \"DENY\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://api.nasa.gov/vesta-wmts/catalog/Vesta_Dawn_HAMO_DTM_DLR_Global_48ppd8/1.0.0/default/default028mm/0/0/0.png"
+					},
+					"response": []
+				},
+				{
+					"name": "Mars",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body time is within acceptable range\", function () {\r",
+									"    const minTime = 100; \r",
+									"    const maxTime = 2000; \r",
+									"    const bodyTime = pm.response.responseTime; \r",
+									"\r",
+									"    pm.expect(bodyTime).to.be.within(minTime, maxTime);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response size is less than 2000B\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is not null\", function () {\r",
+									"    pm.expect(pm.response.text()).to.not.equal(null);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is in a valid image format\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"image/png\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response schema validation for image/png format\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"image/png\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Header is correct\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"image/png\");\r",
+									"    pm.response.to.have.header(\"Content-Length\", \"273\");\r",
+									"    pm.response.to.have.header(\"Connection\", \"keep-alive\");\r",
+									"    pm.response.to.have.header(\"Accept-Ranges\", \"bytes\");\r",
+									"    pm.response.to.have.header(\"Access-Control-Allow-Origin\", \"*\");\r",
+									"    pm.response.to.have.header(\"X-Content-Type-Options\", \"nosniff\");\r",
+									"    pm.response.to.have.header(\"X-Frame-Options\", \"DENY\");\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response schema validation for image/png format\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"image/png\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://api.nasa.gov/mars-wmts/catalog/curiosity_hirise_mosaic/1.0.0/default/default028mm/0/0/1.png"
+					},
+					"response": []
+				},
+				{
+					"name": "Moon",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body time is within acceptable range\", function () {\r",
+									"    const minTime = 100; \r",
+									"    const maxTime = 1000; \r",
+									"    const bodyTime = pm.response.responseTime; \r",
+									"\r",
+									"    pm.expect(bodyTime).to.be.within(minTime, maxTime);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response size is less than 2000B\", function () {\r",
+									"    pm.expect(pm.response.responseSize).to.be.below(2000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is not null\", function () {\r",
+									"    pm.expect(pm.response.text()).to.not.equal(null);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is in a valid image format\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"image/png\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response schema validation for image/png format\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"image/png\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Header is correct\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"image/png\");\r",
+									"    pm.response.to.have.header(\"Content-Length\", \"519\");\r",
+									"    pm.response.to.have.header(\"Connection\", \"Keep-Alive\");\r",
+									"    pm.response.to.have.header(\"Accept-Ranges\", \"bytes\");\r",
+									"    pm.response.to.have.header(\"Access-Control-Allow-Origin\", \"*\");\r",
+									"    pm.response.to.have.header(\"Content-Security-Policy\", \"frame-ancestors 'self' aelp.smartsparrow.com;\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response schema validation for image/png format\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"image/png\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://trek.nasa.gov/tiles/Moon/EQ/Apollo15_PanCam_Slope_25N311E_5mp/1.0.0/default/default028mm/0/0/0.png"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
