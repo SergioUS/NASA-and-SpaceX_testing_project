@@ -14,9 +14,13 @@
 
 <div align="left"><h2>
 
-[Andrei Markovich](https://www.linkedin.com/in/andrei-markovich)
+[Andrei Markovich](https://www.linkedin.com/in/andrei-markovich) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Project Manager</strong>
+<code><img width="1%" src="https://github.com/user-attachments/assets/d8634330-234a-4e0e-b163-b8859a1b66bf"></code>
+_[Sergey Efremov](https://www.linkedin.com/in/sefremoff/)_ 
 
-[Elena Olkhovskaia](https://www.linkedin.com/in/elena-olkhovskaia)
+[Elena Olkhovskaia](https://www.linkedin.com/in/elena-olkhovskaia) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Team Lead</strong>
+<code><img width="1%" src="https://github.com/user-attachments/assets/d8634330-234a-4e0e-b163-b8859a1b66bf"></code>
+_[Tatsiana Lentz](https://www.linkedin.com/in/tatsianalentz/)_ 
 
 [Julia Delmar](https://www.linkedin.com/in/julia-delmar/)
 
