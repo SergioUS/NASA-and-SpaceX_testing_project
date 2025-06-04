@@ -39,14 +39,28 @@ _[Tatsiana Lentz](https://www.linkedin.com/in/tatsianalentz/)_
 </h2></div>
 
 
-### Technology Stack
-<a href="https://www.jetbrains.com/idea/">
-    <img src="https://seeklogo.com/images/S/selenium-logo-DB9103D7CF-seeklogo.com.png" width="40" height="40"  alt="Selenium"/>
-</a>
-<a href="https://www.jetbrains.com/idea/">
-    <img src="https://blog.jetbrains.com/wp-content/uploads/2019/01/pycharm_icon.svg" width="40" height="40"  alt="PyCharm"/>
-</a>
-<a href="https://www.jetbrains.com/idea/">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Python.svg/270px-Python.svg.png" width="40" height="40"  alt="Python"/>
-</a>
+<details open>
+  <summary><h2>🛠 Our Skills</h2></summary>
+  <p>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/python/python-icon.svg"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-icon.svg"></code>
+    <code><img width="3%" src="https://blog.jetbrains.com/wp-content/uploads/2019/01/pycharm_icon.svg"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/google_chrome/google_chrome-icon.svg"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/microsoft_edge/microsoft_edge-icon.svg"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/firefox/firefox-icon.svg"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/atlassian_jira/atlassian_jira-icon.svg"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/gtmetrix/gtmetrix-icon.svg"></code>
+    <code><img width="3%" src="https://raw.githubusercontent.com/gilbarbara/logos/main/logos/lighthouse.svg"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/browserstack/browserstack-icon.svg"></code>
+    <code><img width="3%" src="https://raw.githubusercontent.com/gilbarbara/logos/main/logos/selenium.svg"></code>
+    <code><img width="3%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxxSJwBauRp4QVl5aTRnqlPKkow6adLJt2Uw&s"></code>
+    <code><img width="3%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/archive/a/ae/20230204082502%21Google_Sheets_2020_Logo.svg/120px-Google_Sheets_2020_Logo.svg.png"></code>
+    <code><img width="3%" src="https://ph-files.imgix.net/79163dc8-1b60-410f-962c-951f966b8c2d.png?auto=format&fit=crop"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/slack/slack-icon.svg"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg"></code>
+    <code><img width="3%" src="https://www.vectorlogo.zone/logos/github/github-tile.svg"></code>
+  </p>
+</details>
 
