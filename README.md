@@ -26,8 +26,6 @@ _[Tatsiana Lentz](https://www.linkedin.com/in/tatsianalentz/)_
 
 [Natalia Skubii](https://www.linkedin.com/in/natalia-skubii/)
 
-[Tatsiana Lentz](https://www.linkedin.com/in/tatsianalentz/)
-
 [Valentina Matikaynen](https://www.linkedin.com/in/valentina-matikaynen)
 
 [Victoria Timura](https://www.linkedin.com/in/victoria-timura)
