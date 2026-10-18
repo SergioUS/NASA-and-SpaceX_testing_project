@@ -12,9 +12,12 @@ red = "\033[31m" # red
 gre = "\033[32m" # green
 dft = "\033[0m" # default/white
 
+item_quantity = "1"
+
 SpaceX_url = "https://www.spacex.com/"
 Dragon_url = "https://www.spacex.com/vehicles/dragon"
 Shop_SpaceX_url = "https://shop.spacex.com/"
+Cart_url = "https://shop.spacex.com/cart"
 
 vehicles_link = "//*[normalize-space()='Vehicles']"
 dragon_link = "//a[normalize-space()='Dragon']"
@@ -26,16 +29,24 @@ shop_spacex_link = '//*[@href="https://shop.spacex.com"]'
 
 superdraco_link = "//div[@class='inner-left-top']//button[@id='section-tab-button-1']"
 draco_link = "//div[@class='inner-left-top']//button[@id='section-tab-button-0']"
+shop_item2_link = "//img[@alt='Starship Milestone First Orbital Flight Mission Patch']"
+dec_quantity = "//span[@data-action='decrease-quantity']"
+inc_quantity = "//span[@data-action='increase-quantity']"
+quantity_link = "//input[@name='quantity']"
+add_to_cart_link = "//button[@type='submit']"
+cart_quantity_link = "//tr[@class='CartItem']//div[@class='QuantitySelector']//input[contains(@name,'updates[')]"
 
 # Verify homepage logo
 homepage_logo = '//*[@class="section-inner feature"]'
 dragon_homepage_logo = "//div[@class='inner-center']//h1[@id='header']"
 shop_spacex_logo = '//*[@class="Slideshow__Image hide-no-js lazyautosizes Image--lazyLoaded"]'
-#shop_spacex_logo = "//img[contains(@class, 'Slideshow__Image')]"
+cart_header = '//*[text() = "Cart"]'
 
 home_title = "SpaceX"
 dragon_title = "SpaceX - Dragon"
 shop_spacex_title = "Official SpaceX Store"
+cart_title = "Your Shopping Cart – SpaceX Store"
+
 
 
 def delay():

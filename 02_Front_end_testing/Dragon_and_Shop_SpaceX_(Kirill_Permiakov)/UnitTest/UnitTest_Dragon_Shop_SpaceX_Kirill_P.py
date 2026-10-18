@@ -2,7 +2,7 @@ import time
 from selenium import webdriver
 import unittest
 from selenium.common.exceptions import WebDriverException as WDE
-from selenium.webdriver import ActionChains
+from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -238,6 +238,103 @@ class Positive_Chrome (unittest.TestCase):
     # Test results for TC009
         print("   ")
         print("  !!!  SHOP SPACEX TC009 PASS   !!!        ")
+        print("        --------------------      ")
+
+    def test_case_010_shop_spacex (self):
+        driver = self.driver
+    # TC010
+        print("                             ")
+        print("          SHOP SPACEX TC010  ")
+        print("        -------------------- ")
+
+    # 1. Opening Shop SpaceX site
+        driver.get(h.Shop_SpaceX_url)
+
+    # Verifying correct web page
+        wait = WebDriverWait(driver, 5)
+        wait.until(EC.visibility_of_element_located((By.XPATH, h.shop_spacex_logo)))
+        print("----Homepage_logo Shop SpaceX is OK")
+        h.delay()
+
+    # Check API
+        h.check_API(driver)
+
+    # Checking title
+        h.assert_title(driver, h.shop_spacex_title)
+        h.delay()
+
+    # Check URL
+        h.check_URL(driver, h.Shop_SpaceX_url)
+
+    # 2. Select 2nd item in-stock item and open its PDP (Product Display Page)
+        scroll = str(500)
+        self.driver.execute_script("document.body.style.zoom='50%'")
+        print("----Shop SpaceX page ZOOM 50% is OK")
+        driver.execute_script("window.scrollTo(0, " + scroll + ")")
+        print("----Shop SpaceX page scrolled to " + scroll + " is OK")
+        h.check_clickable_element(driver, h.shop_item2_link)
+        print("----Shop SpaceX item 2 Click is OK")
+        h.delay()
+
+    # 3. Select size / quantity if required - Quantity: 1
+        decrease = wait.until(EC.element_to_be_clickable((By.XPATH, h.dec_quantity)))
+        increase = wait.until(EC.element_to_be_clickable((By.XPATH, h.inc_quantity)))
+        quantity = wait.until(EC.element_to_be_clickable((By.XPATH, h.quantity_link)))
+        addToCart = wait.until(EC.element_to_be_clickable((By.XPATH, h.add_to_cart_link)))
+        increase.click()
+        print("----Shop SpaceX item 2 Quantity increase.click() is OK")
+        decrease.click()
+        print("----Shop SpaceX item 2 Quantity decrease.click() is OK")
+        quantity.clear()
+        print("----Shop SpaceX item 2 Quantity quantity.clear() is NOT OK idk")
+        quantity.send_keys("23")
+        print("----Shop SpaceX item 2 Quantity quantity.send_keys('23') is OK")
+        quantity.send_keys(Keys.BACK_SPACE)
+        print("----Shop SpaceX item 2 Quantity quantity.send_keys(Keys.BACK_SPACE) is OK")
+        quantity.send_keys(Keys.ARROW_LEFT)
+        print("----Shop SpaceX item 2 Quantity quantity.send_keys(Keys.ARROW_LEFT) is OK")
+        quantity.send_keys(Keys.DELETE)
+        print("----Shop SpaceX item 2 Quantity quantity.send_keys(Keys.DELETE) is OK")
+        quantity.send_keys(Keys.BACK_SPACE)
+        print("----Shop SpaceX item 2 Quantity quantity.send_keys(Keys.BACK_SPACE) is OK")
+        quantity.send_keys(h.item_quantity)
+        print("----Shop SpaceX item 2 Quantity quantity.send_keys(h.item_quantity) = " + h.item_quantity + " is OK")
+    # Getting a value from a field Quantity
+        quantity_val = int(quantity.get_attribute("value"))
+
+        addToCart.click()
+        print("----Shop SpaceX item 2 addToCart.click() is OK")
+        h.delay()
+
+    # Verifying correct web page Cart
+        wait = WebDriverWait(driver, 5)
+        wait.until(EC.visibility_of_element_located((By.XPATH, h.cart_header)))
+        print("----Homepage_logo Cart is OK")
+        h.delay()
+
+    # Check API
+        h.check_API(driver)
+
+    # Checking title
+        h.assert_title(driver, h.cart_title)
+        h.delay()
+
+    # Check URL
+        h.check_URL(driver, h.Cart_url)
+
+        quantity_cart = wait.until(EC.visibility_of_element_located((By.XPATH, h.cart_quantity_link)))
+    # Getting a value from a field Quantity
+        quantity_cart_val = int(quantity_cart.get_attribute("value"))
+
+        if quantity_val == quantity_cart_val:
+            print("----Quantity Cart = " + str(quantity_val) + " is OK")
+        else:
+            print(h.red, "----Quantity Cart = " + str(quantity_val) + " is NOT OK", h.dft)
+
+
+    # Test results for TC010
+        print("   ")
+        print("  !!!  SHOP SPACEX TC010 PASS   !!!        ")
         print("        --------------------      ")
 
     def tearDown(self) -> None:
