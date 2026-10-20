@@ -20,13 +20,12 @@ class Positive_Chrome (unittest.TestCase):
     def setUp(self):
         options = webdriver.ChromeOptions()
         options.page_load_strategy = 'eager'
-        #options.add_argument('--headless')
+        options.add_argument('--headless')
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         self.driver.set_window_size(1920, 1080)
-        #self.driver.execute_script('Chrome.settingsPrivate.setDefaultZoom(0.8);')
-
+        #self.driver.execute_script('Chrome.settingsPrivate.setDefaultZoom(0.8);
 # As per unittest module, each individual test name should start with test_
-    def test_case_006_Dragon (self):
+    def test_case_006_Dragon_Positive (self):
         driver = self.driver
         print("                                                                                                    ")
         print("                                          SPACEX / DRAGON                                         ")
@@ -91,7 +90,7 @@ class Positive_Chrome (unittest.TestCase):
         print("        !!!  DRAGON TC006  PASS   !!!                                                                     ")
         print("        --------------------      ")
 
-    def test_case_007_Dragon (self):
+    def test_case_007_Dragon_Positive (self):
         driver = self.driver
     # TC007
         print("        ")
@@ -127,7 +126,7 @@ class Positive_Chrome (unittest.TestCase):
         print("        !!!  DRAGON TC007  PASS   !!!        ")
         print("        --------------------      ")
 
-    def test_case_008_Dragon (self):
+    def test_case_008_Dragon_Positive (self):
         driver = self.driver
     # TC008
         print("        ")
@@ -164,19 +163,17 @@ class Positive_Chrome (unittest.TestCase):
         print("----Scrolling to Element "+ element_draco.text + " is OK")
         h.delay()
     # 3. Checking Elements
-        h.check_clickable_element(driver, h.superdraco_link)
-        h.check_clickable_element(driver, h.draco_link)
-
-
-
-
+        h.check_clickable_element(driver, h.superdraco_link) # Check link SuperDraco
+        h.check_element(driver,h.superdraco_img_link) # Check img SuperDraco
+        h.check_clickable_element(driver, h.draco_link) # Check link Draco
+        h.check_element(driver, h.draco_img_link) # Check img Draco
 
     # Test results for TC008
         print("   ")
         print("        !!!  DRAGON TC008  PASS   !!!        ")
         print("        --------------------      ")
 
-    def test_case_009_shop_spacex (self):
+    def test_case_009_shop_spacex_Positive (self):
         driver = self.driver
     # TC009
         print("                             ")
@@ -240,7 +237,7 @@ class Positive_Chrome (unittest.TestCase):
         print("  !!!  SHOP SPACEX TC009 PASS   !!!        ")
         print("        --------------------      ")
 
-    def test_case_010_shop_spacex (self):
+    def test_case_010_shop_spacex_Positive (self):
         driver = self.driver
     # TC010
         print("                             ")
@@ -347,18 +344,76 @@ class Negative_Chrome (unittest.TestCase):
     def setUp(self):
         options = webdriver.ChromeOptions()
         options.page_load_strategy = 'eager'
-        options.add_argument('--headless')
+        #options.add_argument('--headless')
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-        #self.driver.set_window_size(1920, 1080)
-        self.driver.execute_script('Chrome.settingsPrivate.setDefaultZoom(0.8);')
+        self.driver.maximize_window()
+
+    def test_case_006_Dragon_Negative (self):
+        driver = self.driver
+    # TC006
+        print("        ")
+        print("        DRAGON TC006 NEGATIVE      ")
+        print("        ---------------------    ")
+
+    # Opening SpaceX - Dragon site
+        driver.get(h.Dragon_url)
+
+    # Verifying correct web page
+        wait = WebDriverWait(driver, 5)
+        wait.until(EC.visibility_of_element_located((By.XPATH, h.dragon_homepage_logo)))
+        print("----Homepage_logo is OK")
+        h.delay()
+
+    # Check API
+        h.check_API(driver)
+
+    # Checking title
+        h.assert_title(driver, h.dragon_title)
+        h.delay()
+
+    # Check URL
+        h.check_URL(driver, h.Dragon_url)
+
+    # Scrolling down to Starship capabilities slide
+        #driver.execute_script("window.scrollTo(0,3100)")
+
+    # 1. Find the Element by XPath
+        element_superdraco = driver.find_element(By.XPATH, h.superdraco_link)
+        element_draco = driver.find_element(By.XPATH, h.draco_link)
+    # 2. Scrolling to the Element
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});",element_draco)
+        print("----Scrolling to Element "+ element_draco.text + " is OK")
+        h.delay()
+    # 3. Changing Element: Draco -> SuperDraco
+        h.check_clickable_element(driver, h.superdraco_link) # Check link SuperDraco
+        h.check_element(driver,h.superdraco_img_link) # Check img SuperDraco
+        print("----Changing Element: Draco -> SuperDraco is OK")
+    # 4. Click Restore Down (middle window button - make window smaller)
+        #driver.set_window_rect(width=1200, height=800)
+        driver.set_window_size(600, 400)
+        print("----Click Restore Down Browser Window is OK")
+        h.delay()
+    # 5. Check content display in restored window
+        h.check_element(driver, h.superdraco_img_link)  # Check img SuperDraco
+        print("----Check content display in restored down window (SuperDraco) is OK")
+        h.check_clickable_element(driver, h.draco_link)  # Check link Draco
+        h.check_element(driver, h.draco_img_link)  # Check img Draco
+        print("----Changing Element: SuperDraco -> Draco is OK")
+    # 6. Click Maximize (fullscreen)
+        driver.maximize_window()
+        print("----Maximize window is OK")
+        h.delay()
+    # 7. Check content display
+        h.check_element(driver, h.draco_img_link) # Check img Draco
+        print("----Check content display Draco is OK")
+    # Test results for TC006
+        print("   ")
+        print("        !!!  DRAGON TC006 NEGATIVE PASS   !!!        ")
+        print("        --------------------      ")
 
 
     def tearDown(self) -> None:
         self.driver.quit()
-
-
-
-
 
 if __name__ == '__main__':
     unittest.main()

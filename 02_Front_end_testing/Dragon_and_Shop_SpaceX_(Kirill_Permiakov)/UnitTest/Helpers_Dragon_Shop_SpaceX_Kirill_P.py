@@ -28,7 +28,9 @@ shop_link = "//*[text()='Shop']"
 shop_spacex_link = '//*[@href="https://shop.spacex.com"]'
 
 superdraco_link = "//div[@class='inner-left-top']//button[@id='section-tab-button-1']"
+superdraco_img_link = '//img[contains(@src , "SuperDraco")]'
 draco_link = "//div[@class='inner-left-top']//button[@id='section-tab-button-0']"
+draco_img_link = '//img[contains(@src , "/Draco")]'
 shop_item2_link = "//img[@alt='Starship Milestone First Orbital Flight Mission Patch']"
 dec_quantity = "//span[@data-action='decrease-quantity']"
 inc_quantity = "//span[@data-action='increase-quantity']"
@@ -99,7 +101,7 @@ def check_URL(driver, c_url):
     else:
         print(red,"ATTENTION! Current URL is not " + chk_url + " Current url is:", cur_url,dft)
 
-# Element check
+# Element check and Click
 def check_clickable_element (driver, locator):
     element = driver.find_element(By.XPATH, locator)
     print("----check_clickable_element " + element.text)
@@ -108,11 +110,25 @@ def check_clickable_element (driver, locator):
     else:
         print(red,"ATTENTION! Element " + element.text + " is NOT displayed OK",dft)
     try:
-        #element = driver.find_element(By.XPATH, el)
         WebDriverWait(driver, 3).until(EC.element_to_be_clickable(element)).click()
         print("----Element " + element.text + " is clickable OK")
         print("----Element " + element.text + " is Clicked OK")
     except WDE:
         print(red,"ATTENTION! Element " + element.text + " is NOT clickable!",dft)
 
-
+# Element check
+def check_element (driver, locator):
+    try:
+        element = driver.find_element(By.XPATH, locator)
+        print("----check_element " + element.text)
+    except WDE:
+        print(red, "----NO such element " + element.text, dft)
+    if element.is_displayed():
+        print("----Element " + element.text + " is displayed OK")
+    else:
+        print(red,"ATTENTION! Element " + element.text + " is NOT displayed OK",dft)
+    try:
+        WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, locator)))
+        print("----Element " + element.text + " presence_of_element_located is OK")
+    except WDE:
+        print(red,"ATTENTION! Element " + element.text + " is NOT presence_of_element_located!",dft)
