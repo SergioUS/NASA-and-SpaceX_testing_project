@@ -409,7 +409,78 @@ class Negative_Chrome (unittest.TestCase):
     # Test results for TC006
         print("   ")
         print("        !!!  DRAGON TC006 NEGATIVE PASS   !!!        ")
-        print("        --------------------      ")
+        print("        -------------------------------------      ")
+
+    def test_case_007_Dragon_Negative (self):
+        driver = self.driver
+    # TC007
+        print("        ")
+        print("        DRAGON TC007 NEGATIVE      ")
+        print("        ---------------------    ")
+
+    # Opening SpaceX - Dragon site
+        driver.get(h.Dragon_url)
+
+    # Verifying correct web page
+        wait = WebDriverWait(driver, 5)
+        wait.until(EC.visibility_of_element_located((By.XPATH, h.dragon_homepage_logo)))
+        print("----Homepage_logo is OK")
+        h.delay()
+
+    # Check API
+        h.check_API(driver)
+
+    # Checking title
+        h.assert_title(driver, h.dragon_title)
+        h.delay()
+
+    # Check URL
+        h.check_URL(driver, h.Dragon_url)
+
+    # 1. Find the Element by XPath
+        dragon_video = driver.find_element(By.XPATH, h.dragon_video_link)
+        print("----Find the Element by XPath " + dragon_video.text + " is OK")
+
+    # 2. Scrolling to the Element
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});",dragon_video)
+        print("----Scrolling to Element "+ dragon_video.text + " is OK")
+        h.delay()
+
+    # 3. Click on image / Play icon to run video
+        h.check_clickable_element(driver, h.dragon_video_link)  # Check link Video
+        print("----Click on image / Play icon to run video is OK")
+
+    # 4. Verify video starts playing
+        driver.switch_to.default_content()
+
+        iframe = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "iframe[src*='ulVZds71CZQ']")))
+        driver.switch_to.frame(iframe)
+        try:
+            print("----Current iframe URL:", driver.execute_script("return window.location.href;"))
+
+            self.assertTrue(h.check_video_playing(driver), "Dragon video is NOT playing!")
+        finally:
+            driver.switch_to.default_content()
+
+    # 5. Click Minimize (minimize browser to taskbar)
+        driver.minimize_window()
+        print("----Click Minimize (minimize browser to taskbar) is OK")
+        h.delay()
+
+    # 6. Click Maximize (fullscreen)
+        driver.maximize_window()
+        print("----Maximize window is OK")
+        h.delay()
+
+    # 7. Check content display
+        h.check_element(driver, h.dragon_video_link) # Check Video locator
+        print("----Check content display Draco is OK")
+
+    # Test results for TC007
+        print("   ")
+        print("        !!!  DRAGON TC007 NEGATIVE PASS   !!!        ")
+        print("        -------------------------------------      ")
 
 
     def tearDown(self) -> None:

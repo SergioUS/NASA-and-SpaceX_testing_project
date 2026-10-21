@@ -5,7 +5,7 @@ import requests
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import WebDriverException as WDE
+from selenium.common.exceptions import WebDriverException as WDE, TimeoutException, WebDriverException
 
 # Color codes
 red = "\033[31m" # red
@@ -37,6 +37,7 @@ inc_quantity = "//span[@data-action='increase-quantity']"
 quantity_link = "//input[@name='quantity']"
 add_to_cart_link = "//button[@type='submit']"
 cart_quantity_link = "//tr[@class='CartItem']//div[@class='QuantitySelector']//input[contains(@name,'updates[')]"
+dragon_video_link = "//picture[@class='responsive-image']//*[@class='play-arrow']//*[name()='svg']//*[name()='path' and contains(@d,'M400-280v-')]"
 
 # Verify homepage logo
 homepage_logo = '//*[@class="section-inner feature"]'
@@ -132,3 +133,40 @@ def check_element (driver, locator):
         print("----Element " + element.text + " presence_of_element_located is OK")
     except WDE:
         print(red,"ATTENTION! Element " + element.text + " is NOT presence_of_element_located!",dft)
+
+
+ # -----------------------------------Negative functions-----------------------------------
+
+# Video playing check
+def check_video_playing(driver):
+    print("----check_video_playing")
+
+    try:
+        pause_locator = "//button[contains(@class,'player-control-play-pause-icon') and @aria-label='Pause video']"
+        timer_locator = "//span[contains(@class,'ytwPlayerTimeDisplayTimeElapsed')]/span[@aria-hidden='true']"
+
+        pause_button = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, pause_locator)))
+        print("----YouTube button:", pause_button.get_attribute("aria-label"))
+
+        timer = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, timer_locator)))
+        start_time = timer.get_attribute("textContent").strip()
+        print("----Video start time:", start_time)
+
+        time.sleep(3)
+
+        timer = driver.find_element(By.XPATH, timer_locator)
+        current_time = timer.get_attribute("textContent").strip()
+        print("----Video current time:", current_time)
+
+        pause_button = driver.find_element(By.XPATH, pause_locator)
+
+        if start_time != current_time and pause_button.get_attribute("aria-label") == "Pause video":
+            print("----Video is playing OK")
+            return True
+
+        print("----ATTENTION! Video is NOT playing!")
+        return False
+
+    except TimeoutException:
+        print("----ATTENTION! YouTube controls NOT found!")
+        return False
