@@ -544,9 +544,83 @@ class Negative_Chrome (unittest.TestCase):
         print("        !!!  DRAGON TC008 NEGATIVE PASS   !!!        ")
         print("        -------------------------------------      ")
 
+    def test_case_009_shop_spacex_Negative(self):
+        driver = self.driver
+    # TC009
+        print("        ")
+        print("        SHOP SPACEX TC009 NEGATIVE      ")
+        print("        --------------------------    ")
+
+    # 1. Opening Shop SpaceX site
+        driver.get(h.Shop_SpaceX_url)
+
+    # Verifying correct web page
+        wait = WebDriverWait(driver, 5)
+        wait.until(EC.visibility_of_element_located((By.XPATH, h.shop_spacex_logo)))
+        print("----Homepage_logo Shop SpaceX is OK")
+        #h.delay()
+
+    # Check API
+        h.check_API(driver)
+
+    # Checking title
+        h.assert_title(driver, h.shop_spacex_title)
+        #h.delay()
+
+    # Check URL
+        h.check_URL(driver, h.Shop_SpaceX_url)
+
+    # 2. Find Search Button Element by XPATH and Click
+        search_btn = driver.find_element(By.XPATH, h.search_btn_link)
+        print("----Find Element by XPATH Search Button is OK")
+        h.check_element(driver, h.search_btn_link)
+        print("----Search_btn_link Element checked is OK")
+        search_btn.click()
+        print("----Click on Search Button is OK")
+
+    # Find Search field Element by XPATH
+        search_input = driver.find_element(By.XPATH, h.search_input_link)
+        print("----Find Element by XPATH Search Input is OK")
+        h.check_element(driver, h.search_input_link)
+        print("----Search_input_link Element checked is OK")
+
+    # 3. Type special symbols "!@#$%^&()" into search field
+        search_input.send_keys(h.negative_search_str)
+        print("----Type special symbols ", h.negative_search_str, " into search field is OK")
+        #h.delay()
+
+    # 4. Send key Enter
+        search_input.send_keys(Keys.ENTER)
+        print("----Send key Enter is OK")
+        #h.delay()
+
+    # 5. Check result
+
+    # Show URL
+        h.show_URL(driver)
+
+    # Check API
+        h.check_API(driver)
+
+    # Checking title
+        h.assert_title(driver, "Search result – SpaceX Store")
+
+    # Check result output Title
+        h.check_element(driver, h.search_res_link)
+        print("----Search result text checked is OK")
+    # Check result output 1 item
+        h.check_element(driver, h.search_res_1_item_link)
+        print("----Search result 1 item checked is OK")
+
+    # Test results for TC009
+        print("   ")
+        print("        !!!  SHOP SPACEX TC009 NEGATIVE PASS   !!!        ")
+        print("        ------------------------------------------      ")
+
 
     def tearDown(self) -> None:
         self.driver.quit()
+
 
 if __name__ == '__main__':
     unittest.main()

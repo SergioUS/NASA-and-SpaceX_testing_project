@@ -13,6 +13,8 @@ gre = "\033[32m" # green
 dft = "\033[0m" # default/white
 
 item_quantity = "1"
+negative_search_str = "!@#$%^&()"
+#negative_search_str = "!@#$%^&()-_/777"
 
 SpaceX_url = "https://www.spacex.com/"
 Dragon_url = "https://www.spacex.com/vehicles/dragon"
@@ -40,6 +42,10 @@ cart_quantity_link = "//tr[@class='CartItem']//div[@class='QuantitySelector']//i
 dragon_video_link = "//picture[@class='responsive-image']//*[@class='play-arrow']//*[name()='svg']//*[name()='path' and contains(@d,'M400-280v-')]"
 swbutt_next_link = '//*[@class="swiper-controls bottom-swiper-controls"]//*[@class="swiper-button swiper-next"]'
 swbutt_prev_link = '//*[@class="swiper-controls bottom-swiper-controls"]//*[@class="swiper-button swiper-previous"]'
+search_btn_link = "//button[normalize-space()='Search']"
+search_input_link = '//input[@id="search-input"]'
+search_res_link = f"""//*[contains(text(), 'results for "{negative_search_str}"')]"""
+search_res_1_item_link = "//main[@id='main']//li[1]"
 
 # Verify homepage logo
 homepage_logo = '//*[@class="section-inner feature"]'
@@ -73,16 +79,16 @@ def assert_title(driver, title):
     try:
         wait.until(EC.title_is(title))
     except WDE:
-        print(red,"ATTENTION! Page " + title + " has wrong Title Wait Time!(WDE)",dft)
+        print(red,"ATTENTION! Page " + title + " has wrong Title Wait Time!(WDE) - ", driver.title, dft)
         driver.get_screenshot_as_file('Wrong_Title_Wait.png')
     try:
         assert title in driver.title
         print("----Title check: Page has, " + "'" + driver.title + "'" + " title as Page title")
     except AssertionError:
-        print(red,"ATTENTION! Page " + title + " has wrong Title!(AssertionError)",dft)
+        print(red,"ATTENTION! Page " + title + " has wrong Title!(AssertionError) - ", driver.title,dft)
         driver.get_screenshot_as_file('Wrong_Title.png')
     except WDE:
-        print(red,"ATTENTION! Page " + title + " has wrong Title!(WDE)",dft)
+        print(red,"ATTENTION! Page " + title + " has wrong Title!(WDE) - ", driver.title,dft)
         driver.get_screenshot_as_file('Wrong_Title.png')
 
 
@@ -172,3 +178,8 @@ def check_video_playing(driver):
     except TimeoutException:
         print("----ATTENTION! YouTube controls NOT found!")
         return False
+
+# show URL
+def show_URL(driver):
+    cur_url = driver.current_url
+    print("----Current URL: " + cur_url + " is OK")
