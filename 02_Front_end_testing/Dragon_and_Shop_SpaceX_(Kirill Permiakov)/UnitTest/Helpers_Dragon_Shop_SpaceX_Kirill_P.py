@@ -38,6 +38,8 @@ quantity_link = "//input[@name='quantity']"
 add_to_cart_link = "//button[@type='submit']"
 cart_quantity_link = "//tr[@class='CartItem']//div[@class='QuantitySelector']//input[contains(@name,'updates[')]"
 dragon_video_link = "//picture[@class='responsive-image']//*[@class='play-arrow']//*[name()='svg']//*[name()='path' and contains(@d,'M400-280v-')]"
+swbutt_next_link = '//*[@class="swiper-controls bottom-swiper-controls"]//*[@class="swiper-button swiper-next"]'
+swbutt_prev_link = '//*[@class="swiper-controls bottom-swiper-controls"]//*[@class="swiper-button swiper-previous"]'
 
 # Verify homepage logo
 homepage_logo = '//*[@class="section-inner feature"]'

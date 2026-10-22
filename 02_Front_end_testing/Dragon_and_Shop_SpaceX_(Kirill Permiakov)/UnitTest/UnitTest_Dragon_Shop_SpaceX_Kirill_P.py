@@ -482,6 +482,68 @@ class Negative_Chrome (unittest.TestCase):
         print("        !!!  DRAGON TC007 NEGATIVE PASS   !!!        ")
         print("        -------------------------------------      ")
 
+    def test_case_008_Dragon_Negative (self):
+        driver = self.driver
+    # TC008
+        print("        ")
+        print("        DRAGON TC008 NEGATIVE      ")
+        print("        ---------------------    ")
+
+    # 1.  Opening SpaceX - Dragon site
+        driver.get(h.Dragon_url)
+
+    # Verifying correct web page
+        wait = WebDriverWait(driver, 5)
+        wait.until(EC.visibility_of_element_located((By.XPATH, h.dragon_homepage_logo)))
+        print("----Homepage_logo is OK")
+        h.delay()
+
+    # Check API
+        h.check_API(driver)
+
+    # Checking title
+        h.assert_title(driver, h.dragon_title)
+        h.delay()
+
+    # Check URL
+        h.check_URL(driver, h.Dragon_url)
+
+    # 2. Scroll to bottom banner / carousel / slider
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        print("----Scroll to bottom banner is OK")
+
+    # Find the Element by XPath
+        swbutt_next = driver.find_element(By.XPATH, h.swbutt_next_link)
+        print("----Find the Element by XPath swbutt_next is OK")
+        h.check_clickable_element(driver, h.swbutt_next_link)
+
+        swbutt_prev = driver.find_element(By.XPATH, h.swbutt_prev_link)
+        print("----Find the Element by XPath swbutt_prev is OK")
+        h.check_clickable_element(driver, h.swbutt_prev_link)
+
+# 3. Click 10 times in a row on Next / forward arrow
+        for i in range(10):
+            swbutt_next.click()
+        print("----Swbutt_next.click 10 times is OK")
+
+#. 4. Click Minimize and then Maximize browser window
+        driver.minimize_window()
+        print("----Minimize_window is OK")
+        h.delay()
+        driver.maximize_window()
+        print("----Maximize_window is OK")
+
+# 5. Click 10 times in a row on Back / Previous / backward arrow
+        for i in range(10):
+            swbutt_prev.click()
+        print("----Swbutt_prev.click 10 times is OK")
+        h.delay()
+
+    # Test results for TC008
+        print("   ")
+        print("        !!!  DRAGON TC008 NEGATIVE PASS   !!!        ")
+        print("        -------------------------------------      ")
+
 
     def tearDown(self) -> None:
         self.driver.quit()
