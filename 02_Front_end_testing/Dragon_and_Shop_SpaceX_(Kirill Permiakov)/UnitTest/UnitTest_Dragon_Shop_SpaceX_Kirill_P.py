@@ -617,6 +617,88 @@ class Negative_Chrome (unittest.TestCase):
         print("        !!!  SHOP SPACEX TC009 NEGATIVE PASS   !!!        ")
         print("        ------------------------------------------      ")
 
+    def test_case_010_shop_spacex_Negative(self):
+        driver = self.driver
+    # TC010
+        print("        ")
+        print("        SHOP SPACEX TC010 NEGATIVE      ")
+        print("        --------------------------    ")
+
+    # 1. Opening Shop SpaceX site
+        driver.get(h.Shop_SpaceX_url)
+
+    # Verifying correct web page
+        wait = WebDriverWait(driver, 5)
+        wait.until(EC.visibility_of_element_located((By.XPATH, h.shop_spacex_logo)))
+        print("----Homepage_logo Shop SpaceX is OK")
+        h.delay()
+
+    # Check API
+        h.check_API(driver)
+
+    # Checking title
+        h.assert_title(driver, h.shop_spacex_title)
+        h.delay()
+
+    # Check URL
+        h.check_URL(driver, h.Shop_SpaceX_url)
+
+    # 2. Select 3rd item in-stock item and open its PDP (Product Display Page)
+        scroll = str(500)
+        self.driver.execute_script("document.body.style.zoom='50%'")
+        print("----Shop SpaceX page ZOOM 50% is OK")
+        driver.execute_script("window.scrollTo(0, " + scroll + ")")
+        print("----Shop SpaceX page scrolled to " + scroll + " is OK")
+        h.check_clickable_element(driver, h.shop_item3_link)
+        print("----Shop SpaceX item 3 Click is OK")
+        h.delay()
+
+    # 3. Find Quantity: field
+        quantity = wait.until(EC.element_to_be_clickable((By.XPATH, h.quantity_link)))
+        addToCart = wait.until(EC.element_to_be_clickable((By.XPATH, h.add_to_cart_link)))
+        quantity.clear() # not work here
+        quantity.send_keys("qwerty")
+        print("----Shop SpaceX item 3 Quantity quantity.send_keys('qwerty') is OK")
+        quantity.send_keys(Keys.TAB)
+
+    # Getting a value from a field Quantity
+        quantity_val = str(quantity.get_attribute("value"))
+
+        h.check_element(driver, h.add_to_cart_link)
+        addToCart.click()
+        print("----Shop SpaceX item 3 addToCart.click() is OK")
+        h.delay()
+
+        # Verifying correct web page Cart
+        wait = WebDriverWait(driver, 5)
+        wait.until(EC.visibility_of_element_located((By.XPATH, h.cart_header)))
+        print("----Homepage_logo Cart is OK")
+        h.delay()
+
+        # Check API
+        h.check_API(driver)
+
+        # Checking title
+        h.assert_title(driver, h.cart_title)
+        h.delay()
+
+        # Check URL
+        h.check_URL(driver, h.Cart_url)
+
+        quantity_cart = wait.until(EC.visibility_of_element_located((By.XPATH, h.cart_quantity_link)))
+        # Getting a value from a field Quantity
+        quantity_cart_val = str(quantity_cart.get_attribute("value"))
+
+        if quantity_val == quantity_cart_val:
+            print("----Quantity Cart = " + str(quantity_val) + " is OK")
+        else:
+            print(h.red, "----Quantity Cart = " + str(quantity_val) + " is NOT OK", h.dft)
+
+    # Test results for TC010
+        print("   ")
+        print("        !!!  SHOP SPACEX TC010 NEGATIVE PASS   !!!        ")
+        print("        ------------------------------------------      ")
+
 
     def tearDown(self) -> None:
         self.driver.quit()

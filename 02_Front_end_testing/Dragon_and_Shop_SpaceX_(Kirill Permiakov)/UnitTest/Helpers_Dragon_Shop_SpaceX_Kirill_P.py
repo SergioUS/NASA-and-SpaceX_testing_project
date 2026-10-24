@@ -34,6 +34,7 @@ superdraco_img_link = '//img[contains(@src , "SuperDraco")]'
 draco_link = "//div[@class='inner-left-top']//button[@id='section-tab-button-0']"
 draco_img_link = '//img[contains(@src , "/Draco")]'
 shop_item2_link = "//img[@alt='Starship Milestone First Orbital Flight Mission Patch']"
+shop_item3_link = '//img[@data-image-id="44600129650767"]'
 dec_quantity = "//span[@data-action='decrease-quantity']"
 inc_quantity = "//span[@data-action='increase-quantity']"
 quantity_link = "//input[@name='quantity']"
@@ -71,6 +72,8 @@ def check_API(driver):
         print("----API response code is OK")
     else:
         print(red,"ATTENTION! API response code is not 200", "Current code is:", code,dft)
+        raise AssertionError(f"API check FAILED! Status Code: {code}")
+        #assert False, f"API check FAILED! Status Code: {code}"
 
 # Homepage title check
 def assert_title(driver, title):
@@ -81,15 +84,18 @@ def assert_title(driver, title):
     except WDE:
         print(red,"ATTENTION! Page " + title + " has wrong Title Wait Time!(WDE) - ", driver.title, dft)
         driver.get_screenshot_as_file('Wrong_Title_Wait.png')
+        raise AssertionError("ATTENTION! Page " + title + " has wrong Title Wait Time!(WDE) - ", driver.title)
     try:
         assert title in driver.title
         print("----Title check: Page has, " + "'" + driver.title + "'" + " title as Page title")
     except AssertionError:
         print(red,"ATTENTION! Page " + title + " has wrong Title!(AssertionError) - ", driver.title,dft)
         driver.get_screenshot_as_file('Wrong_Title.png')
+        raise AssertionError("ATTENTION! Page " + title + " has wrong Title!(AssertionError) - ", driver.title)
     except WDE:
         print(red,"ATTENTION! Page " + title + " has wrong Title!(WDE) - ", driver.title,dft)
         driver.get_screenshot_as_file('Wrong_Title.png')
+        raise AssertionError("ATTENTION! Page " + title + " has wrong Title!(WDE) - ", driver.title)
 
 
 # Dragon page title check
@@ -98,6 +104,7 @@ def dragon_title_check(driver, title = "Dragon"):
     if "Dragon" not in driver.title:
         #raise Exception("ATTENTION! Title is different on Spacex-Dragon page!")
         print(red,"ATTENTION! Page " + title + " has wrong Title!",dft)
+        raise AssertionError("ATTENTION! Page " + title + " has wrong Title!")
     else:
         print("----Title check: Page has", driver.title + " as page title")
 
@@ -109,6 +116,7 @@ def check_URL(driver, c_url):
         print("----Current URL: " + driver.current_url + " is OK")
     else:
         print(red,"ATTENTION! Current URL is not " + chk_url + " Current url is:", cur_url,dft)
+        raise AssertionError("ATTENTION! Current URL is not " + chk_url + " Current url is:", cur_url)
 
 # Element check and Click
 def check_clickable_element (driver, locator):
@@ -118,12 +126,14 @@ def check_clickable_element (driver, locator):
         print("----Element " + element.text + " is displayed OK")
     else:
         print(red,"ATTENTION! Element " + element.text + " is NOT displayed OK",dft)
+        raise AssertionError("ATTENTION! Element " + element.text + " is NOT displayed OK")
     try:
         WebDriverWait(driver, 3).until(EC.element_to_be_clickable(element)).click()
         print("----Element " + element.text + " is clickable OK")
         print("----Element " + element.text + " is Clicked OK")
     except WDE:
         print(red,"ATTENTION! Element " + element.text + " is NOT clickable!",dft)
+        raise AssertionError("ATTENTION! Element " + element.text + " is NOT clickable!")
 
 # Element check
 def check_element (driver, locator):
@@ -132,15 +142,18 @@ def check_element (driver, locator):
         print("----check_element " + element.text)
     except WDE:
         print(red, "----NO such element " + element.text, dft)
+        raise AssertionError("----NO such element " + element.text)
     if element.is_displayed():
         print("----Element " + element.text + " is displayed OK")
     else:
         print(red,"ATTENTION! Element " + element.text + " is NOT displayed OK",dft)
+        raise AssertionError("ATTENTION! Element " + element.text + " is NOT displayed OK")
     try:
         WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, locator)))
         print("----Element " + element.text + " presence_of_element_located is OK")
     except WDE:
         print(red,"ATTENTION! Element " + element.text + " is NOT presence_of_element_located!",dft)
+        raise AssertionError("ATTENTION! Element " + element.text + " is NOT presence_of_element_located!")
 
 
  # -----------------------------------Negative functions-----------------------------------
@@ -173,11 +186,13 @@ def check_video_playing(driver):
             return True
 
         print("----ATTENTION! Video is NOT playing!")
-        return False
+        # return False
+        raise AssertionError("----ATTENTION! Video is NOT playing!")
 
     except TimeoutException:
         print("----ATTENTION! YouTube controls NOT found!")
-        return False
+        #return False
+        raise AssertionError("----ATTENTION! YouTube controls NOT found!")
 
 # show URL
 def show_URL(driver):
