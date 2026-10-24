@@ -344,9 +344,9 @@ class Negative_Chrome (unittest.TestCase):
     def setUp(self):
         options = webdriver.ChromeOptions()
         options.page_load_strategy = 'eager'
-        #options.add_argument('--headless')
+        options.add_argument('--headless')
+        options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-        self.driver.maximize_window()
 
     def test_case_006_Dragon_Negative (self):
         driver = self.driver
@@ -572,6 +572,7 @@ class Negative_Chrome (unittest.TestCase):
 
     # 2. Find Search Button Element by XPATH and Click
         search_btn = driver.find_element(By.XPATH, h.search_btn_link)
+        #search_btn = wait.until(EC.invisibility_of_element_located((By.XPATH, h.search_btn_link)))
         print("----Find Element by XPATH Search Button is OK")
         h.check_element(driver, h.search_btn_link)
         print("----Search_btn_link Element checked is OK")
@@ -587,7 +588,7 @@ class Negative_Chrome (unittest.TestCase):
     # 3. Type special symbols "!@#$%^&()" into search field
         search_input.send_keys(h.negative_search_str)
         print("----Type special symbols ", h.negative_search_str, " into search field is OK")
-        #h.delay()
+        h.delay()
 
     # 4. Send key Enter
         search_input.send_keys(Keys.ENTER)
@@ -595,7 +596,6 @@ class Negative_Chrome (unittest.TestCase):
         #h.delay()
 
     # 5. Check result
-
     # Show URL
         h.show_URL(driver)
 
@@ -649,6 +649,7 @@ class Negative_Chrome (unittest.TestCase):
         print("----Shop SpaceX page ZOOM 50% is OK")
         driver.execute_script("window.scrollTo(0, " + scroll + ")")
         print("----Shop SpaceX page scrolled to " + scroll + " is OK")
+        h.delay()
         h.check_clickable_element(driver, h.shop_item3_link)
         print("----Shop SpaceX item 3 Click is OK")
         h.delay()

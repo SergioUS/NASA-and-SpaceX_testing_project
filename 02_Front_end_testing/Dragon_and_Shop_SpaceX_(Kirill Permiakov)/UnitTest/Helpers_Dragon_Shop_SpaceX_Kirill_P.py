@@ -43,7 +43,12 @@ cart_quantity_link = "//tr[@class='CartItem']//div[@class='QuantitySelector']//i
 dragon_video_link = "//picture[@class='responsive-image']//*[@class='play-arrow']//*[name()='svg']//*[name()='path' and contains(@d,'M400-280v-')]"
 swbutt_next_link = '//*[@class="swiper-controls bottom-swiper-controls"]//*[@class="swiper-button swiper-next"]'
 swbutt_prev_link = '//*[@class="swiper-controls bottom-swiper-controls"]//*[@class="swiper-button swiper-previous"]'
-search_btn_link = "//button[normalize-space()='Search']"
+#search_btn_link = "//button[normalize-space()='Search']"
+search_btn_link = '//button[text()="Search"]'
+#search_btn_link = "//button[@class='Header__Icon Icon-Wrapper Icon-Wrapper--clickable hidden-desk is-expanded']"
+#search_btn_link = """//button[@class='Header__Icon Icon-Wrapper Icon-Wrapper--clickable hidden-desk' and @aria-label="Open search bar"]"""
+
+
 search_input_link = '//input[@id="search-input"]'
 search_res_link = f"""//*[contains(text(), 'results for "{negative_search_str}"')]"""
 search_res_1_item_link = "//main[@id='main']//li[1]"
