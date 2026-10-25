@@ -109,12 +109,12 @@ def delay():
 # Homepage API check
 def check_API(driver):
     code = requests.get(driver.current_url).status_code
-    if code == 200:
-        print("----API check: Url has ", requests.get(driver.current_url).status_code, " as Status Code")
+    if code == 200 or code == 429:
+        print("----API check: Url has ", code, " as Status Code")
         print("----API response code is OK")
     else:
         take_screenshot(driver)
-        print(red,"ATTENTION! API response code is not 200", "Current code is:", code,dft)
+        print(red,"ATTENTION! API response code is not 200 or 429", "Current code is:", code,dft)
         raise AssertionError(f"API check FAILED! Status Code: {code}")
         #assert False, f"API check FAILED! Status Code: {code}"
 

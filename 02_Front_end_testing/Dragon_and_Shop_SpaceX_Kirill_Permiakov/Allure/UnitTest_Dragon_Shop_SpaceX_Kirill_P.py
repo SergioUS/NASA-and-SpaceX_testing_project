@@ -12,7 +12,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.edge.service import Service
 from faker import Faker
-import UnitTest.Helpers_Dragon_Shop_SpaceX_Kirill_P as h
+#import Allure.Helpers_Dragon_Shop_SpaceX_Kirill_P as h
+import Helpers_Dragon_Shop_SpaceX_Kirill_P as h
+import AllureReports
 
 # Positive tests
 class Positive_Chrome (unittest.TestCase):
@@ -1399,6 +1401,6 @@ class Negative_Firefox (unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(AllureReports)
 
 
