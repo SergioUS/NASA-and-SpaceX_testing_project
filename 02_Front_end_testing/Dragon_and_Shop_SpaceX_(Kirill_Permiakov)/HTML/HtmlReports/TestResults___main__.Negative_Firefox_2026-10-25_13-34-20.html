@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unittest Results</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="text-capitalize">Unittest Results</h2>
+                <p class='attribute'><strong>Start Time: </strong>2026-10-25 13:34:20</p>
+                <p class='attribute'><strong>Duration: </strong>125.55 s</p>
+                <p class='attribute'><strong>Summary: </strong>Total: 5, Pass: 4, Error: 1</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-md-10">
+                <table class='table table-hover table-responsive'>
+                    <thead>
+                        <tr>
+                            <th>__main__.Negative_Firefox</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class='success'>
+                            <td class="col-xs-10">test_case_006_Dragon_Negative</td>
+                            <td class="col-xs-1">
+                                <span class="label label-success" style="display:block;width:40px;">Pass</span>
+                            </td>
+                            <td class="col-xs-1">
+                                <button class="btn btn-default btn-xs">View</button>
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td class="col-xs-9" colspan="3"><p>        
+        DRAGON TC006 NEGATIVE      
+        ---------------------    
+----Homepage_logo is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'SpaceX - Dragon' title as Page title
+----Current URL: https://www.spacex.com/vehicles/dragon is OK
+----Scrolling to Element DRACO is OK
+----check_clickable_element SUPERDRACO
+----Element SUPERDRACO is displayed OK
+----Element SUPERDRACO is clickable OK
+----Element SUPERDRACO is Clicked OK
+----check_element 
+----Element  is displayed OK
+----Element  presence_of_element_located is OK
+----Changing Element: Draco -> SuperDraco is OK
+----Click Restore Down Browser Window is OK
+----check_element 
+----Element  is displayed OK
+----Element  presence_of_element_located is OK
+----Check content display in restored down window (SuperDraco) is OK
+----check_clickable_element DRACO
+----Element DRACO is displayed OK
+----Element DRACO is clickable OK
+----Element DRACO is Clicked OK
+----check_element 
+----Element  is displayed OK
+----Element  presence_of_element_located is OK
+----Changing Element: SuperDraco -> Draco is OK
+----Maximize window is OK
+----check_element 
+----Element  is displayed OK
+----Element  presence_of_element_located is OK
+----Check content display Draco is OK
+   
+        !!!  DRAGON TC006 NEGATIVE PASS   !!!        
+        -------------------------------------      
+</p>
+                            </td>
+                        </tr>
+                        <tr class='warning'>
+                            <td class="col-xs-10">test_case_007_Dragon_Negative</td>
+                            <td class="col-xs-1">
+                                <span class="label label-warning" style="display:block;width:40px;">Error</span>
+                            </td>
+                            <td class="col-xs-1">
+                                <button class="btn btn-default btn-xs">View</button>
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td class="col-xs-9" colspan="3"><p>        
+        DRAGON TC007 NEGATIVE      
+        ---------------------    
+----Homepage_logo is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'SpaceX - Dragon' title as Page title
+----Current URL: https://www.spacex.com/vehicles/dragon is OK
+----Find the Element by XPath  is OK
+----Scrolling to Element  is OK
+----check_clickable_element 
+----Element  is displayed OK
+----Element  is clickable OK
+----Element  is Clicked OK
+----Click on image / Play icon to run video is OK
+----Current iframe URL: https://www.youtube.com/embed/ulVZds71CZQ?enablejsapi=1&version=3
+----check_video_playing
+</p><p style="color:maroon;">WebDriverException: Message: SecurityError: Permission denied to access property "pageXOffset" on cross-origin object
+Stacktrace:
+@undefined:0:0
+</p><p style="color:maroon;">Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\02_Front_end_testing\Dragon_and_Shop_SpaceX_(Kirill_Permiakov)\HTML\Helpers_Dragon_Shop_SpaceX_Kirill_P.py", line 220, in check_video_playing
+    pause_button = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, pause_locator)))
+  File "C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 121, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:14:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:169:5
+NoSuchElementError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:538:5
+dom.find/</<@chrome://remote/content/shared/DOM.sys.mjs:137:16
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\02_Front_end_testing\Dragon_and_Shop_SpaceX_(Kirill_Permiakov)\HTML\UnitTest_Dragon_Shop_SpaceX_Kirill_P.py", line 1156, in test_case_007_Dragon_Negative
+    self.assertTrue(h.check_video_playing(driver), "Dragon video is NOT playing!")
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\02_Front_end_testing\Dragon_and_Shop_SpaceX_(Kirill_Permiakov)\HTML\Helpers_Dragon_Shop_SpaceX_Kirill_P.py", line 245, in check_video_playing
+    take_screenshot(driver)
+    ~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\02_Front_end_testing\Dragon_and_Shop_SpaceX_(Kirill_Permiakov)\HTML\Helpers_Dragon_Shop_SpaceX_Kirill_P.py", line 99, in take_screenshot
+    saved = driver.save_screenshot(filepath)
+  File "C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 994, in save_screenshot
+    return self.get_screenshot_as_file(filename)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 971, in get_screenshot_as_file
+    png = self.get_screenshot_as_png()
+  File "C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 1002, in get_screenshot_as_png
+    return b64decode(self.get_screenshot_as_base64().encode("ascii"))
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 1012, in get_screenshot_as_base64
+    return self.execute(Command.SCREENSHOT)["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 506, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\.venv\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: SecurityError: Permission denied to access property "pageXOffset" on cross-origin object
+Stacktrace:
+@undefined:0:0
+
+</p>
+                            </td>
+                        </tr>
+                        <tr class='success'>
+                            <td class="col-xs-10">test_case_008_Dragon_Negative</td>
+                            <td class="col-xs-1">
+                                <span class="label label-success" style="display:block;width:40px;">Pass</span>
+                            </td>
+                            <td class="col-xs-1">
+                                <button class="btn btn-default btn-xs">View</button>
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td class="col-xs-9" colspan="3"><p>        
+        DRAGON TC008 NEGATIVE      
+        ---------------------    
+----Homepage_logo is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'SpaceX - Dragon' title as Page title
+----Current URL: https://www.spacex.com/vehicles/dragon is OK
+----Scroll to bottom banner is OK
+----Find the Element by XPath swbutt_next is OK
+----check_clickable_element 
+----Element  is displayed OK
+----Element  is clickable OK
+----Element  is Clicked OK
+----Find the Element by XPath swbutt_prev is OK
+----check_clickable_element 
+----Element  is displayed OK
+----Element  is clickable OK
+----Element  is Clicked OK
+----Swbutt_next.click 10 times is OK
+----Minimize_window is OK
+----Maximize_window is OK
+----Swbutt_prev.click 10 times is OK
+   
+        !!!  DRAGON TC008 NEGATIVE PASS   !!!        
+        -------------------------------------      
+</p>
+                            </td>
+                        </tr>
+                        <tr class='success'>
+                            <td class="col-xs-10">test_case_009_shop_spacex_Negative</td>
+                            <td class="col-xs-1">
+                                <span class="label label-success" style="display:block;width:40px;">Pass</span>
+                            </td>
+                            <td class="col-xs-1">
+                                <button class="btn btn-default btn-xs">View</button>
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td class="col-xs-9" colspan="3"><p>        
+        SHOP SPACEX TC009 NEGATIVE      
+        --------------------------    
+----Homepage_logo Shop SpaceX is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'Official SpaceX Store' title as Page title
+----Current URL: https://shop.spacex.com/ is OK
+----Find Element by XPATH Search Button is OK
+----check_element SEARCH
+----Element SEARCH is displayed OK
+----Element SEARCH presence_of_element_located is OK
+----Search_btn_link Element checked is OK
+----Click on Search Button is OK
+----Find Element by XPATH Search Input is OK
+----check_element 
+----Element  is displayed OK
+----Element  presence_of_element_located is OK
+----Search_input_link Element checked is OK
+----Type special symbols  !@#$%^&()  into search field is OK
+----Send key Enter is OK
+----Current URL: https://shop.spacex.com/ is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'Search result – SpaceX Store' title as Page title
+----check_element 159 results for "!@#$%^&()"
+----Element 159 results for "!@#$%^&()" is displayed OK
+----Element 159 results for "!@#$%^&()" presence_of_element_located is OK
+----Search result text checked is OK
+----check_element UNISEX LUCKY LAUNCH T-SHIRT
+$35.00
+----Element UNISEX LUCKY LAUNCH T-SHIRT
+$35.00 is displayed OK
+----Element UNISEX LUCKY LAUNCH T-SHIRT
+$35.00 presence_of_element_located is OK
+----Search result 1 item checked is OK
+   
+        !!!  SHOP SPACEX TC009 NEGATIVE PASS   !!!        
+        ------------------------------------------      
+</p>
+                            </td>
+                        </tr>
+                        <tr class='success'>
+                            <td class="col-xs-10">test_case_010_shop_spacex_Negative</td>
+                            <td class="col-xs-1">
+                                <span class="label label-success" style="display:block;width:40px;">Pass</span>
+                            </td>
+                            <td class="col-xs-1">
+                                <button class="btn btn-default btn-xs">View</button>
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td class="col-xs-9" colspan="3"><p>        
+        SHOP SPACEX TC010 NEGATIVE      
+        --------------------------    
+----Homepage_logo Shop SpaceX is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'Official SpaceX Store' title as Page title
+----Current URL: https://shop.spacex.com/ is OK
+----Shop SpaceX page ZOOM 50% is OK
+----Shop SpaceX page scrolled to 500 is OK
+----check_clickable_element 
+----Element  is displayed OK
+----Element  is clickable OK
+----Element  is Clicked OK
+----Shop SpaceX item 3 Click is OK
+----Shop SpaceX item 3 Quantity quantity.send_keys('qwerty') is OK
+----check_element ADD TO CART
+----Element ADD TO CART is displayed OK
+----Element ADD TO CART presence_of_element_located is OK
+----Shop SpaceX item 3 addToCart.click() is OK
+----Homepage_logo Cart is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'Your Shopping Cart – SpaceX Store' title as Page title
+----Current URL: https://shop.spacex.com/cart is OK
+----Quantity Cart = 1 is OK
+   
+        !!!  SHOP SPACEX TC010 NEGATIVE PASS   !!!        
+        ------------------------------------------      
+</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                Total: 5, Pass: 4, Error: 1 -- Duration: 125.55 s
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('td').on('click', '.btn', function(e){
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                var $this = $(this);
+                var $nextRow = $this.closest('tr').next('tr');
+                $nextRow.slideToggle("fast");
+                $this.text(function(i, text){
+                    if (text === 'View') {
+                        return 'Hide';
+                    } else {
+                        return 'View';
+                    };
+                });
+            });
+        });
+    </script>
+</body>
+</html
