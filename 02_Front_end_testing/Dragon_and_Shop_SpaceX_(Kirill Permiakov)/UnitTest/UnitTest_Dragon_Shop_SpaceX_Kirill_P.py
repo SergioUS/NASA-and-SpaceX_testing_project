@@ -1,4 +1,3 @@
-import time
 from selenium import webdriver
 import unittest
 from selenium.common.exceptions import WebDriverException as WDE
