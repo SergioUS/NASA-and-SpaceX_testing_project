@@ -1,3 +1,7 @@
+import inspect
+import unittest
+from datetime import datetime
+import os
 import random
 import time
 
@@ -64,7 +68,41 @@ dragon_title = "SpaceX - Dragon"
 shop_spacex_title = "Official SpaceX Store"
 cart_title = "Your Shopping Cart – SpaceX Store"
 
+# Take a Screenshot
+def take_screenshot(driver):
 
+    # Get helper function name
+    helper_name = inspect.stack()[1].function
+
+    # Get current unittest test name
+    test_name = "Unknown_Test"
+
+    for frame in inspect.stack():
+        test_self = frame.frame.f_locals.get("self")
+
+        if isinstance(test_self, unittest.TestCase):
+            test_name = test_self._testMethodName
+            break
+
+    # Screenshots folder
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    folder = os.path.join(current_dir, "Screenshots")
+    os.makedirs(folder, exist_ok=True)
+
+    # Current date and time
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+    # Screenshot filename
+    filename = f"{test_name}_{helper_name}_{timestamp}.png"
+    filepath = os.path.join(folder, filename)
+
+    # Save screenshot
+    saved = driver.save_screenshot(filepath)
+
+    if saved:
+        print("----Screenshot saved:", filepath)
+    else:
+        raise AssertionError("Screenshot NOT saved!")
 
 def delay():
     time.sleep(random.randint(1, 4))
@@ -76,6 +114,7 @@ def check_API(driver):
         print("----API check: Url has ", requests.get(driver.current_url).status_code, " as Status Code")
         print("----API response code is OK")
     else:
+        take_screenshot(driver)
         print(red,"ATTENTION! API response code is not 200", "Current code is:", code,dft)
         raise AssertionError(f"API check FAILED! Status Code: {code}")
         #assert False, f"API check FAILED! Status Code: {code}"
@@ -87,6 +126,7 @@ def assert_title(driver, title):
     try:
         wait.until(EC.title_is(title))
     except WDE:
+        take_screenshot(driver)
         print(red,"ATTENTION! Page " + title + " has wrong Title Wait Time!(WDE) - ", driver.title, dft)
         driver.get_screenshot_as_file('Wrong_Title_Wait.png')
         raise AssertionError("ATTENTION! Page " + title + " has wrong Title Wait Time!(WDE) - ", driver.title)
@@ -94,10 +134,12 @@ def assert_title(driver, title):
         assert title in driver.title
         print("----Title check: Page has, " + "'" + driver.title + "'" + " title as Page title")
     except AssertionError:
+        take_screenshot(driver)
         print(red,"ATTENTION! Page " + title + " has wrong Title!(AssertionError) - ", driver.title,dft)
         driver.get_screenshot_as_file('Wrong_Title.png')
         raise AssertionError("ATTENTION! Page " + title + " has wrong Title!(AssertionError) - ", driver.title)
     except WDE:
+        take_screenshot(driver)
         print(red,"ATTENTION! Page " + title + " has wrong Title!(WDE) - ", driver.title,dft)
         driver.get_screenshot_as_file('Wrong_Title.png')
         raise AssertionError("ATTENTION! Page " + title + " has wrong Title!(WDE) - ", driver.title)
@@ -107,7 +149,7 @@ def assert_title(driver, title):
 def dragon_title_check(driver, title = "Dragon"):
     print("----dragon_title_check")
     if "Dragon" not in driver.title:
-        #raise Exception("ATTENTION! Title is different on Spacex-Dragon page!")
+        take_screenshot(driver)
         print(red,"ATTENTION! Page " + title + " has wrong Title!",dft)
         raise AssertionError("ATTENTION! Page " + title + " has wrong Title!")
     else:
@@ -120,6 +162,7 @@ def check_URL(driver, c_url):
     if cur_url == chk_url:
         print("----Current URL: " + driver.current_url + " is OK")
     else:
+        take_screenshot(driver)
         print(red,"ATTENTION! Current URL is not " + chk_url + " Current url is:", cur_url,dft)
         raise AssertionError("ATTENTION! Current URL is not " + chk_url + " Current url is:", cur_url)
 
@@ -130,6 +173,7 @@ def check_clickable_element (driver, locator):
     if element.is_displayed():
         print("----Element " + element.text + " is displayed OK")
     else:
+        take_screenshot(driver)
         print(red,"ATTENTION! Element " + element.text + " is NOT displayed OK",dft)
         raise AssertionError("ATTENTION! Element " + element.text + " is NOT displayed OK")
     try:
@@ -137,6 +181,7 @@ def check_clickable_element (driver, locator):
         print("----Element " + element.text + " is clickable OK")
         print("----Element " + element.text + " is Clicked OK")
     except WDE:
+        take_screenshot(driver)
         print(red,"ATTENTION! Element " + element.text + " is NOT clickable!",dft)
         raise AssertionError("ATTENTION! Element " + element.text + " is NOT clickable!")
 
@@ -146,17 +191,20 @@ def check_element (driver, locator):
         element = driver.find_element(By.XPATH, locator)
         print("----check_element " + element.text)
     except WDE:
+        take_screenshot(driver)
         print(red, "----NO such element " + element.text, dft)
         raise AssertionError("----NO such element " + element.text)
     if element.is_displayed():
         print("----Element " + element.text + " is displayed OK")
     else:
+        take_screenshot(driver)
         print(red,"ATTENTION! Element " + element.text + " is NOT displayed OK",dft)
         raise AssertionError("ATTENTION! Element " + element.text + " is NOT displayed OK")
     try:
         WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, locator)))
         print("----Element " + element.text + " presence_of_element_located is OK")
     except WDE:
+        take_screenshot(driver)
         print(red,"ATTENTION! Element " + element.text + " is NOT presence_of_element_located!",dft)
         raise AssertionError("ATTENTION! Element " + element.text + " is NOT presence_of_element_located!")
 
@@ -166,7 +214,6 @@ def check_element (driver, locator):
 # Video playing check
 def check_video_playing(driver):
     print("----check_video_playing")
-
     try:
         pause_locator = "//button[contains(@class,'player-control-play-pause-icon') and @aria-label='Pause video']"
         timer_locator = "//span[contains(@class,'ytwPlayerTimeDisplayTimeElapsed')]/span[@aria-hidden='true']"
@@ -192,9 +239,11 @@ def check_video_playing(driver):
 
         print("----ATTENTION! Video is NOT playing!")
         # return False
+        take_screenshot(driver)
         raise AssertionError("----ATTENTION! Video is NOT playing!")
 
     except TimeoutException:
+        take_screenshot(driver)
         print("----ATTENTION! YouTube controls NOT found!")
         #return False
         raise AssertionError("----ATTENTION! YouTube controls NOT found!")
