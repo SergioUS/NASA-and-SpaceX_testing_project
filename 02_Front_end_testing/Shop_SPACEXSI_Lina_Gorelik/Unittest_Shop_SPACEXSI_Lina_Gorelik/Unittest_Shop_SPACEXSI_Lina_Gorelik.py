@@ -16,8 +16,8 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.edge.service import Service as EdgeService
-import HtmlTestRunner
-#import AllureReports
+#import HtmlTestRunner
+import AllureReports
 
 
 def delay():
@@ -268,8 +268,8 @@ class EdgeNegativeSPACEXSI(unittest.TestCase):
         self.driver.quit()
 
 
-if __name__ == '__main__':
-    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='./HtmlReports'))
+#if __name__ == '__main__':
+#    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='./HtmlReports'))
 
-# if __name__ == "__main__":
-#   unittest.main(AllureReports)
+if __name__ == "__main__":
+    unittest.main(AllureReports)
