@@ -1,0 +1,27 @@
+                             
+          SHOP SPACEX TC009  
+        -------------------- 
+----Homepage_logo is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'SpaceX' title as Page title
+----Current URL: https://www.spacex.com/ is OK
+----Visibility_of_element: Shop is OK
+----Hover the mouse cursor over Shop is OK
+----check_clickable_element SPACEX
+----Element SPACEX is displayed OK
+----Element SPACEX is clickable OK
+----Element SPACEX is Clicked OK
+----Current URL: https://shop.spacex.com/
+----Page title: Official SpaceX Store
+----Windows: ['46306253-bf9d-4f4f-be2f-9bfcde2f37b6', '4330b808-4499-415d-812a-5ea0496c2d06']
+----Homepage_logo Shop SpaceX is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'Official SpaceX Store' title as Page title
+----Current URL: https://shop.spacex.com/ is OK
+   
+  !!!  SHOP SPACEX TC009 PASS   !!!        
+        --------------------      

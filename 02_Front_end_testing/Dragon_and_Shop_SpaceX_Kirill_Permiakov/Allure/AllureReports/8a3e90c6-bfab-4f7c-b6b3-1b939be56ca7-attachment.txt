@@ -1,0 +1,39 @@
+        
+        DRAGON TC006 NEGATIVE      
+        ---------------------    
+----Homepage_logo is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'SpaceX - Dragon' title as Page title
+----Current URL: https://www.spacex.com/vehicles/dragon is OK
+----Scrolling to Element DRACO is OK
+----check_clickable_element SUPERDRACO
+----Element SUPERDRACO is displayed OK
+----Element SUPERDRACO is clickable OK
+----Element SUPERDRACO is Clicked OK
+----check_element 
+----Element  is displayed OK
+----Element  presence_of_element_located is OK
+----Changing Element: Draco -> SuperDraco is OK
+----Click Restore Down Browser Window is OK
+----check_element 
+----Element  is displayed OK
+----Element  presence_of_element_located is OK
+----Check content display in restored down window (SuperDraco) is OK
+----check_clickable_element DRACO
+----Element DRACO is displayed OK
+----Element DRACO is clickable OK
+----Element DRACO is Clicked OK
+----check_element 
+----Element  is displayed OK
+----Element  presence_of_element_located is OK
+----Changing Element: SuperDraco -> Draco is OK
+----Maximize window is OK
+----check_element 
+----Element  is displayed OK
+----Element  presence_of_element_located is OK
+----Check content display Draco is OK
+   
+        !!!  DRAGON TC006 NEGATIVE PASS   !!!        
+        -------------------------------------      

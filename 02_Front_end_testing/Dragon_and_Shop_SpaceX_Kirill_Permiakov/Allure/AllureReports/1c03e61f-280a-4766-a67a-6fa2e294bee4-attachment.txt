@@ -1,0 +1,41 @@
+        
+        SHOP SPACEX TC009 NEGATIVE      
+        --------------------------    
+----Homepage_logo Shop SpaceX is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'Official SpaceX Store' title as Page title
+----Current URL: https://shop.spacex.com/ is OK
+----Find Element by XPATH Search Button is OK
+----check_element SEARCH
+----Element SEARCH is displayed OK
+----Element SEARCH presence_of_element_located is OK
+----Search_btn_link Element checked is OK
+----Click on Search Button is OK
+----Find Element by XPATH Search Input is OK
+----check_element 
+----Element  is displayed OK
+----Element  presence_of_element_located is OK
+----Search_input_link Element checked is OK
+----Type special symbols  !@#$%^&()  into search field is OK
+----Send key Enter is OK
+----Current URL: https://shop.spacex.com/search?q=%21%40%23%24%25%5E%26%28%29&type=product is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'Search result – SpaceX Store' title as Page title
+----check_element 159 results for "!@#$%^&()"
+----Element 159 results for "!@#$%^&()" is displayed OK
+----Element 159 results for "!@#$%^&()" presence_of_element_located is OK
+----Search result text checked is OK
+----check_element UNISEX LUCKY LAUNCH T-SHIRT
+$35.00
+----Element UNISEX LUCKY LAUNCH T-SHIRT
+$35.00 is displayed OK
+----Element UNISEX LUCKY LAUNCH T-SHIRT
+$35.00 presence_of_element_located is OK
+----Search result 1 item checked is OK
+   
+        !!!  SHOP SPACEX TC009 NEGATIVE PASS   !!!        
+        ------------------------------------------      

@@ -1,0 +1,21 @@
+                             
+          SHOP SPACEX TC009  
+        -------------------- 
+----Homepage_logo is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'SpaceX' title as Page title
+----Current URL: https://www.spacex.com/ is OK
+----Visibility_of_element: Shop is OK
+----Hover the mouse cursor over Shop is OK
+----check_clickable_element SPACEX
+----Element SPACEX is displayed OK
+----Element SPACEX is clickable OK
+----Element SPACEX is Clicked OK
+----Current URL: https://shop.spacex.com/
+----Page title: Official SpaceX Store
+----Windows: ['FAA4B1898DB0AB4D28F31CB03263329E', '48E0754C43213722607E054136B1C9A3']
+----Homepage_logo Shop SpaceX is OK
+----Screenshot saved: C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\02_Front_end_testing\Dragon_and_Shop_SpaceX_Kirill_Permiakov\Allure\Screenshots\test_case_009_shop_spacex_Positive_check_API_2026-10-25_15-36-17.png
+[31m ATTENTION! API response code is not 200 Current code is: 429 [0m

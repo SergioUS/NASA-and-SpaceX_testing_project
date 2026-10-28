@@ -1,0 +1,31 @@
+        
+        DRAGON TC007 NEGATIVE      
+        ---------------------    
+----Homepage_logo is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'SpaceX - Dragon' title as Page title
+----Current URL: https://www.spacex.com/vehicles/dragon is OK
+----Find the Element by XPath  is OK
+----Scrolling to Element  is OK
+----check_clickable_element 
+----Element  is displayed OK
+----Element  is clickable OK
+----Element  is Clicked OK
+----Click on image / Play icon to run video is OK
+----Current iframe URL: https://www.youtube.com/embed/ulVZds71CZQ?enablejsapi=1&version=3
+----check_video_playing
+----YouTube button: Pause video
+----Video start time: 0:00
+----Video current time: 0:03
+----Video is playing OK
+----Click Minimize (minimize browser to taskbar) is OK
+----Maximize window is OK
+----check_element 
+----Element  is displayed OK
+----Element  presence_of_element_located is OK
+----Check content display Draco is OK
+   
+        !!!  DRAGON TC007 NEGATIVE PASS   !!!        
+        -------------------------------------      

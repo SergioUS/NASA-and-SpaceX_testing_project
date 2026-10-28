@@ -1,0 +1,6 @@
+        
+        SHOP SPACEX TC009 NEGATIVE      
+        --------------------------    
+----Homepage_logo Shop SpaceX is OK
+----Screenshot saved: C:\Users\Kirill\PycharmProjects\NASA-and-SpaceX_testing_project\02_Front_end_testing\Dragon_and_Shop_SpaceX_Kirill_Permiakov\Allure\Screenshots\test_case_009_shop_spacex_Negative_check_API_2026-10-25_15-38-05.png
+[31m ATTENTION! API response code is not 200 Current code is: 429 [0m

@@ -1,0 +1,36 @@
+                             
+          SHOP SPACEX TC010  
+        -------------------- 
+----Homepage_logo Shop SpaceX is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'Official SpaceX Store' title as Page title
+----Current URL: https://shop.spacex.com/ is OK
+----Shop SpaceX page ZOOM 50% is OK
+----Shop SpaceX page scrolled to 500 is OK
+----check_clickable_element 
+----Element  is displayed OK
+----Element  is clickable OK
+----Element  is Clicked OK
+----Shop SpaceX item 2 Click is OK
+----Shop SpaceX item 2 Quantity increase.click() is OK
+----Shop SpaceX item 2 Quantity decrease.click() is OK
+----Shop SpaceX item 2 Quantity quantity.clear() is NOT OK idk
+----Shop SpaceX item 2 Quantity quantity.send_keys('23') is OK
+----Shop SpaceX item 2 Quantity quantity.send_keys(Keys.BACK_SPACE) is OK
+----Shop SpaceX item 2 Quantity quantity.send_keys(Keys.ARROW_LEFT) is OK
+----Shop SpaceX item 2 Quantity quantity.send_keys(Keys.DELETE) is OK
+----Shop SpaceX item 2 Quantity quantity.send_keys(Keys.BACK_SPACE) is OK
+----Shop SpaceX item 2 Quantity quantity.send_keys(h.item_quantity) = 1 is OK
+----Shop SpaceX item 2 addToCart.click() is OK
+----Homepage_logo Cart is OK
+----API check: Url has  200  as Status Code
+----API response code is OK
+----assert_title
+----Title check: Page has, 'Your Shopping Cart – SpaceX Store' title as Page title
+----Current URL: https://shop.spacex.com/cart is OK
+----Quantity Cart = 1 is OK
+   
+  !!!  SHOP SPACEX TC010 PASS   !!!        
+        --------------------      
