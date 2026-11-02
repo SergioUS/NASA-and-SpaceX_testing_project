@@ -34,6 +34,18 @@ _[Tatsiana Lentz](https://www.linkedin.com/in/tatsianalentz/)_
 
 [Zara Avramov](https://www.linkedin.com/in/zara-avramov)
 
+<code><img width="1%" src="https://github.com/user-attachments/assets/d8634330-234a-4e0e-b163-b8859a1b66bf"></code>
+[Lina Gorelik](https://www.linkedin.com/in/lina-gorelik/)
+
+<code><img width="1%" src="https://github.com/user-attachments/assets/d8634330-234a-4e0e-b163-b8859a1b66bf"></code>
+[Dordzhi Yashkeev](https://www.linkedin.com/in/dordzhi-yashkeev/)
+
+<code><img width="1%" src="https://github.com/user-attachments/assets/d8634330-234a-4e0e-b163-b8859a1b66bf"></code>
+[Volha Antsipenka](https://www.linkedin.com/in/volhaantsipenka/)
+
+<code><img width="1%" src="https://github.com/user-attachments/assets/d8634330-234a-4e0e-b163-b8859a1b66bf"></code>
+[Kirill Permiakov](https://www.linkedin.com/in/kirill-permiakov)
+
 </h2></div>
 
 
