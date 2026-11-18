@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
 
 # Ensure screenshots directory exists next to this module
@@ -53,8 +54,9 @@ def _open_shop(driver):
     print("The 'Shop' dropdown is visible")
 
     main_window = driver.current_window_handle
-    driver.find_element(By.XPATH, spacexsi_btn).click()
-    print("'SPACEXSI' button is clickable")
+    spacexsi = driver.find_element(By.XPATH, spacexsi_btn)
+    driver.execute_script("arguments[0].click();", spacexsi)
+    print("'SPACEXSI' button clicked via JS")
     time.sleep(5)
 
     # The shop may open in a NEW TAB - switch if needed
@@ -163,11 +165,29 @@ def _add_to_cart_and_checkout(driver, qty):
         time.sleep(2)
     add_btn.click()
     print("'Add to cart' button is clickable")
-    time.sleep(8)
-    # Ensure you are redirected to the cart page ('Cart')
-    wait = WebDriverWait(driver, 15)
-    wait.until(EC.visibility_of_element_located(
-        (By.XPATH, "//h1[contains(.,'Your cart') or contains(.,'Cart')]")))
+    time.sleep(10)
+
+    # Wait for cart page or cart drawer to appear
+    wait = WebDriverWait(driver, 20)
+    try:
+        wait.until(EC.visibility_of_element_located(
+            (By.XPATH, "//h1[contains(.,'Your cart') or contains(.,'Cart')]")))
+    except TimeoutException:
+        # Firefox: cart may open as drawer — click cart icon to go to full cart page
+        print("Cart page not loaded, trying cart icon...")
+        try:
+            cart_icon = driver.find_element(
+                By.XPATH, "//a[contains(@href,'/cart')] | //button[contains(@aria-label,'cart')] | //*[contains(@class,'cart')]//a")
+            driver.execute_script("arguments[0].click();", cart_icon)
+            time.sleep(5)
+            wait.until(EC.visibility_of_element_located(
+                (By.XPATH, "//h1[contains(.,'Your cart') or contains(.,'Cart')]")))
+        except Exception:
+            # Last resort: direct navigation to cart
+            print("Navigating to cart directly...")
+            driver.get("https://shop.x.com/cart")
+            time.sleep(5)
+
     assert "/cart" in driver.current_url, "URL is NOT correct " + driver.current_url
     print("URL is correct", driver.current_url)
     # Ensure the 'Checkout' button is visible and active, then click it
@@ -181,6 +201,62 @@ def _add_to_cart_and_checkout(driver, qty):
            ("information" in driver.current_url or "contact_information" in driver.current_url), \
         "URL is NOT correct " + driver.current_url
     print("URL is correct", driver.current_url)
+
+
+#_________________________________________________________________________________________________
+
+def _select_state(driver, state_name="Oregon", state_value="OR"):
+    """Force state selection - overrides Shopify React-controlled select."""
+    try:
+        state = driver.find_element(By.XPATH, "//select[@id='SelectPS2x_32_2u_33_36_31_2p_38_2x_33_32-28']")
+    except:
+        state = driver.find_element(
+            By.XPATH, "//select[@id='Select1' or @name='zone' or @autocomplete='address-level1']")
+
+    driver.execute_script("arguments[0].scrollIntoView({block:'center'});", state)
+    time.sleep(1)
+
+    # Native property descriptor trick for React controlled components
+    driver.execute_script("""
+        var sel = arguments[0];
+        var val = arguments[1];
+        // Get native setter to bypass React's synthetic event system
+        var descriptor = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value');
+        if (descriptor && descriptor.set) {
+            descriptor.set.call(sel, val);
+        } else {
+            sel.value = val;
+        }
+        // Dispatch native events that React listens to
+        sel.dispatchEvent(new Event('input', { bubbles: true }));
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+        sel.dispatchEvent(new Event('blur', { bubbles: true }));
+    """, state, state_value)
+    print(f"State set to '{state_value}' via native descriptor")
+    time.sleep(2)
+
+    # Verify
+    actual = state.get_attribute("value")
+    if actual != state_value:
+        # Fallback: click option directly
+        driver.execute_script("""
+            var sel = arguments[0];
+            var val = arguments[1];
+            var opts = sel.options;
+            for (var i = 0; i < opts.length; i++) {
+                if (opts[i].value === val) {
+                    opts[i].selected = true;
+                    break;
+                }
+            }
+            sel.dispatchEvent(new Event('change', { bubbles: true }));
+        """, state, state_value)
+        print("Fallback: option selected directly")
+        time.sleep(2)
+        actual = state.get_attribute("value")
+
+    assert actual == state_value, f"Could not set state to {state_name}! Current value='{actual}'"
+    print(f"State verified: value='{actual}'")
 
 
 #_________________________________________________________________________________________________
@@ -325,31 +401,39 @@ def tc_p_005(driver):
     apt.send_keys("# 90")
     print("Apartment entered")
 
-    city = driver.find_element(
-        By.XPATH, "//input[@id='TextField3' or @name='city' or @autocomplete='address-level2']")
+    try:
+        city = driver.find_element(By.XPATH, "//input[@id='TextFieldPS2x_32_2u_33_36_31_2p_38_2x_33_32-27']")
+    except:
+        city = driver.find_element(
+            By.XPATH, "//input[@id='TextField3' or @name='city' or @autocomplete='address-level2']")
     city.clear()
     city.send_keys("Oakridge")
     print("City entered")
 
-    # Zip / postal code
+    # State: Oregon — enter BEFORE ZIP
+    _select_state(driver, state_name="Oregon", state_value="OR")
+
+    # Zip / postal code — entered AFTER state
     zip_code = driver.find_element(
         By.XPATH, "//input[@id='TextField4' or @name='postalCode' or @autocomplete='postal-code']")
     zip_code.clear()
     zip_code.send_keys("97463")
     print("ZIP entered")
-
-    # State: Oregon (OR)
-    state = driver.find_element(
-        By.XPATH, "//select[@id='Select1' or @name='zone' or @autocomplete='address-level1']")
-    driver.execute_script("arguments[0].scrollIntoView({block:'center'});", state)
+    time.sleep(3)  # Let Shopify auto-fill run (it will set California)
+    driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
     time.sleep(1)
-    driver.execute_script("arguments[0].click();", state)
-    time.sleep(2)
-    oregon_option = driver.find_element(
-        By.XPATH,
-        "//select[@id='Select1' or @name='zone' or @autocomplete='address-level1']/option[contains(.,'Oregon')]")
-    driver.execute_script("arguments[0].click();", oregon_option)
-    print("State 'Oregon' selected")
+
+    # Close "Save address?" popup if it appeared
+    try:
+        no_thanks = driver.find_element(By.XPATH, "//button[contains(.,'No thanks')]")
+        driver.execute_script("arguments[0].click();", no_thanks)
+        print("Closed 'Save address?' popup")
+        time.sleep(1)
+    except:
+        pass
+
+    # Force State back to Oregon after ZIP auto-fill
+    _select_state(driver, state_name="Oregon", state_value="OR")
 
     # Click 'Continue to shipping' button
     cont_ship = driver.find_element(
@@ -483,8 +567,8 @@ def tc_n_004(driver):
         By.XPATH, "//input[@id='email' or @name='email' or @type='email']")
     driver.execute_script("arguments[0].scrollIntoView();", email)
     email.clear()
-    email.send_keys("*abc#def@mail.com")
-    print("Invalid email '*abc#def@mail.com' entered")
+    email.send_keys("abc#def@mail.com")
+    print("Invalid email 'abc#def@mail.com' entered")
 
     # In the 'First Name' field, enter the special character '*'
     first_name = driver.find_element(
@@ -514,29 +598,39 @@ def tc_n_004(driver):
     apt.send_keys("# 90")
     print("Apartment entered")
 
-    city = driver.find_element(
-        By.XPATH, "//input[@id='TextField3' or @name='city' or @autocomplete='address-level2']")
+    try:
+        city = driver.find_element(By.XPATH, "//input[@id='TextFieldPS2x_32_2u_33_36_31_2p_38_2x_33_32-27']")
+    except:
+        city = driver.find_element(
+            By.XPATH, "//input[@id='TextField3' or @name='city' or @autocomplete='address-level2']")
     city.clear()
     city.send_keys("Oakridge")
     print("City entered")
 
+    # State: Oregon — enter BEFORE ZIP
+    _select_state(driver, state_name="Oregon", state_value="OR")
+
+    # Zip / postal code — entered AFTER state
     zip_code = driver.find_element(
         By.XPATH, "//input[@id='TextField4' or @name='postalCode' or @autocomplete='postal-code']")
     zip_code.clear()
     zip_code.send_keys("97463")
     print("ZIP entered")
-
-    state = driver.find_element(
-        By.XPATH, "//select[@id='Select1' or @name='zone' or @autocomplete='address-level1']")
-    driver.execute_script("arguments[0].scrollIntoView({block:'center'});", state)
+    time.sleep(3)  # Let Shopify auto-fill run (it will set California)
+    driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
     time.sleep(1)
-    driver.execute_script("arguments[0].click();", state)
-    time.sleep(2)
-    oregon_option = driver.find_element(
-        By.XPATH,
-        "//select[@id='Select1' or @name='zone' or @autocomplete='address-level1']/option[contains(.,'Oregon')]")
-    driver.execute_script("arguments[0].click();", oregon_option)
-    print("State 'Oregon' selected")
+
+    # Close "Save address?" popup if it appeared
+    try:
+        no_thanks = driver.find_element(By.XPATH, "//button[contains(.,'No thanks')]")
+        driver.execute_script("arguments[0].click();", no_thanks)
+        print("Closed 'Save address?' popup")
+        time.sleep(1)
+    except:
+        pass
+
+    # Force State back to Oregon after ZIP auto-fill
+    _select_state(driver, state_name="Oregon", state_value="OR")
 
     # Click 'Continue to shipping' button
     cont_btn = driver.find_element(

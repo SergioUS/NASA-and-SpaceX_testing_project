@@ -17,7 +17,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.edge.service import Service as EdgeService
 #import HtmlTestRunner
-import AllureReports
+#import AllureReports
 
 
 def delay():
@@ -38,26 +38,24 @@ class ChromePositiveSPACEXSI(unittest.TestCase):
 
     def test_TC_P_001(self):
         ls.tc_p_001(self.driver)
-        self.driver.quit()
 
     def test_TC_P_002(self):
         ls.tc_p_002(self.driver)
-        self.driver.quit()
 
     def test_TC_P_003(self):
         ls.tc_p_003(self.driver)
-        self.driver.quit()
 
     def test_TC_P_004(self):
         ls.tc_p_004(self.driver)
-        self.driver.quit()
 
     def test_TC_P_005(self):
         ls.tc_p_005(self.driver)
-        self.driver.quit()
 
     def tearDown(self):
-        self.driver.quit()
+        try:
+            self.driver.quit()
+        except Exception:
+            pass
 
 
 class ChromeNegativeSPACEXSI(unittest.TestCase):
@@ -74,26 +72,24 @@ class ChromeNegativeSPACEXSI(unittest.TestCase):
 
     def test_TC_N_001(self):
         ls.tc_n_001(self.driver)
-        self.driver.quit()
 
     def test_TC_N_002(self):
         ls.tc_n_002(self.driver)
-        self.driver.quit()
 
     def test_TC_N_003(self):
         ls.tc_n_003(self.driver)
-        self.driver.quit()
 
     def test_TC_N_004(self):
         ls.tc_n_004(self.driver)
-        self.driver.quit()
 
     def test_TC_N_005(self):
         ls.tc_n_005(self.driver)
-        self.driver.quit()
 
     def tearDown(self):
-        self.driver.quit()
+        try:
+            self.driver.quit()
+        except Exception:
+            pass
 
 
 class FirefoxPositiveSPACEXSI(unittest.TestCase):
@@ -108,36 +104,34 @@ class FirefoxPositiveSPACEXSI(unittest.TestCase):
         options.set_preference("dom.ipc.processCount", 1)
         options.add_argument("--width=1920")
         options.add_argument("--height=1080")
-        # Fallback: if GitHub API rate-limits geckodriver download, use PATH geckodriver
         try:
             service = FirefoxService(GeckoDriverManager().install())
         except Exception:
             print("GeckoDriverManager failed (likely GitHub rate limit), falling back to PATH geckodriver")
             service = FirefoxService()
         self.driver = webdriver.Firefox(service=service, options=options)
+        time.sleep(15)
 
     def test_TC_P_001(self):
         ls.tc_p_001(self.driver)
-        self.driver.quit()
 
     def test_TC_P_002(self):
         ls.tc_p_002(self.driver)
-        self.driver.quit()
 
     def test_TC_P_003(self):
         ls.tc_p_003(self.driver)
-        self.driver.quit()
 
     def test_TC_P_004(self):
         ls.tc_p_004(self.driver)
-        self.driver.quit()
 
     def test_TC_P_005(self):
         ls.tc_p_005(self.driver)
-        self.driver.quit()
 
     def tearDown(self):
-        self.driver.quit()
+        try:
+            self.driver.quit()
+        except Exception:
+            pass
 
 
 class FirefoxNegativeSPACEXSI(unittest.TestCase):
@@ -152,7 +146,6 @@ class FirefoxNegativeSPACEXSI(unittest.TestCase):
         options.set_preference("dom.ipc.processCount", 1)
         options.add_argument("--width=1920")
         options.add_argument("--height=1080")
-        # Fallback: if GitHub API rate-limits geckodriver download, use PATH geckodriver
         try:
             service = FirefoxService(GeckoDriverManager().install())
         except Exception:
@@ -163,26 +156,24 @@ class FirefoxNegativeSPACEXSI(unittest.TestCase):
 
     def test_TC_N_001(self):
         ls.tc_n_001(self.driver)
-        self.driver.quit()
 
     def test_TC_N_002(self):
         ls.tc_n_002(self.driver)
-        self.driver.quit()
 
     def test_TC_N_003(self):
         ls.tc_n_003(self.driver)
-        self.driver.quit()
 
     def test_TC_N_004(self):
         ls.tc_n_004(self.driver)
-        self.driver.quit()
 
     def test_TC_N_005(self):
         ls.tc_n_005(self.driver)
-        self.driver.quit()
 
     def tearDown(self):
-        self.driver.quit()
+        try:
+            self.driver.quit()
+        except Exception:
+            pass
 
 
 class EdgePositiveSPACEXSI(unittest.TestCase):
@@ -193,7 +184,6 @@ class EdgePositiveSPACEXSI(unittest.TestCase):
         options.add_argument(
             "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.")
-        # Fallback: if Microsoft CDN is unreachable, use PATH edgedriver
         try:
             service = EdgeService(EdgeChromiumDriverManager().install())
         except Exception:
@@ -204,26 +194,24 @@ class EdgePositiveSPACEXSI(unittest.TestCase):
 
     def test_TC_P_001(self):
         ls.tc_p_001(self.driver)
-        self.driver.quit()
 
     def test_TC_P_002(self):
         ls.tc_p_002(self.driver)
-        self.driver.quit()
 
     def test_TC_P_003(self):
         ls.tc_p_003(self.driver)
-        self.driver.quit()
 
     def test_TC_P_004(self):
         ls.tc_p_004(self.driver)
-        self.driver.quit()
 
     def test_TC_P_005(self):
         ls.tc_p_005(self.driver)
-        self.driver.quit()
 
     def tearDown(self):
-        self.driver.quit()
+        try:
+            self.driver.quit()
+        except Exception:
+            pass
 
 
 class EdgeNegativeSPACEXSI(unittest.TestCase):
@@ -234,7 +222,6 @@ class EdgeNegativeSPACEXSI(unittest.TestCase):
         options.add_argument(
             "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.")
-        # Fallback: if Microsoft CDN is unreachable, use PATH edgedriver
         try:
             service = EdgeService(EdgeChromiumDriverManager().install())
         except Exception:
@@ -242,34 +229,32 @@ class EdgeNegativeSPACEXSI(unittest.TestCase):
             service = EdgeService()
         self.driver = webdriver.Edge(service=service, options=options)
         self.driver.maximize_window()
-        time.sleep(8)
+        time.sleep(5)
 
     def test_TC_N_001(self):
         ls.tc_n_001(self.driver)
-        self.driver.quit()
 
     def test_TC_N_002(self):
         ls.tc_n_002(self.driver)
-        self.driver.quit()
 
     def test_TC_N_003(self):
         ls.tc_n_003(self.driver)
-        self.driver.quit()
 
     def test_TC_N_004(self):
         ls.tc_n_004(self.driver)
-        self.driver.quit()
 
     def test_TC_N_005(self):
         ls.tc_n_005(self.driver)
-        self.driver.quit()
 
     def tearDown(self):
-        self.driver.quit()
+        try:
+            self.driver.quit()
+        except Exception:
+            pass
 
 
 #if __name__ == '__main__':
 #    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='./HtmlReports'))
 
-if __name__ == "__main__":
-    unittest.main(AllureReports)
+#if __name__ == "__main__":
+#    unittest.main(AllureReports)
