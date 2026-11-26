@@ -38,8 +38,10 @@ draco_link = "//div[@class='inner-left-top']//button[@id='section-tab-button-0']
 draco_img_link = '//img[contains(@src , "/Draco")]'
 shop_item2_link = "//img[@alt='Starship Milestone First Orbital Flight Mission Patch']"
 shop_item3_link = '//img[@data-image-id="44600129650767"]'
-dec_quantity = "//span[@data-action='decrease-quantity']"
-inc_quantity = "//span[@data-action='increase-quantity']"
+#dec_quantity = "//span[@data-action='decrease-quantity']"
+dec_quantity = "//button[@aria-label='Decrease quantity']"
+#inc_quantity = "//span[@data-action='increase-quantity']"
+inc_quantity = "//button[@aria-label='Increase quantity']"
 quantity_link = "//input[@name='quantity']"
 add_to_cart_link = "//button[@type='submit']"
 cart_quantity_link = "//tr[@class='CartItem']//div[@class='QuantitySelector']//input[contains(@name,'updates[')]"
@@ -48,6 +50,7 @@ swbutt_next_link = '//*[@class="swiper-controls bottom-swiper-controls"]//*[@cla
 swbutt_prev_link = '//*[@class="swiper-controls bottom-swiper-controls"]//*[@class="swiper-button swiper-previous"]'
 #search_btn_link = "//button[normalize-space()='Search']"
 search_btn_link = '//button[text()="Search"]'
+search_res_title = "Search result – SpaceX Store"
 #search_btn_link = "//button[@class='Header__Icon Icon-Wrapper Icon-Wrapper--clickable hidden-desk is-expanded']"
 #search_btn_link = """//button[@class='Header__Icon Icon-Wrapper Icon-Wrapper--clickable hidden-desk' and @aria-label="Open search bar"]"""
 
@@ -57,7 +60,8 @@ search_res_link = f"""//*[contains(text(), 'results for "{negative_search_str}"'
 search_res_1_item_link = "//main[@id='main']//li[1]"
 
 # Verify homepage logo
-homepage_logo = '//*[@class="section-inner feature"]'
+#homepage_logo = '//*[@class="section-inner feature"]'
+homepage_logo = "//*[name()='path' and contains(@d,'M33.4556 7')]"
 dragon_homepage_logo = "//div[@class='inner-center']//h1[@id='header']"
 shop_spacex_logo = '//*[@class="Slideshow__Image hide-no-js lazyautosizes Image--lazyLoaded"]'
 cart_header = '//*[text() = "Cart"]'
